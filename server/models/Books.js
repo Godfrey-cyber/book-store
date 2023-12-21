@@ -14,12 +14,12 @@ const BookSchema = new mongoose.Schema({
 		type: String,
 		default: "https://sky.garden/assets/loading-spinners.svg"
 	},
-	// brand: { 
-	// 	type: String, default: "Generic"
-	// },
-	// model: { 
-	// 	type: String, default: "Generic"
-	// },
+	pages: { 
+		type: Number, required: true
+	},
+	year: {
+		type: Number, reqired: true
+	},
 	condition: {
 		type: String, required: true, default: 'New'
 	},

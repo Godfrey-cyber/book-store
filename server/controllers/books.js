@@ -1,14 +1,19 @@
 import Book from "../models/Books.js"
+import Category from "../models/Category.js"
 
 // CREATE A NEW BOOK
 export const createBook = async(req, res) => {
-	const { title, desc, price, photo, inStock, discount, catId, condition, userId, author } = req.body
-	console.log(req.body)
+	const { title, desc, price, photo, inStock, discount, catId, condition, userId, author, pages, year } = req.body
 	try {
-		const book = await Book.create({ title, desc, price, photo, inStock, discount, catId, condition, userId: req.user._id, author })
+		const book = await Book.create({ title, desc, price, photo, inStock, discount, catId, condition, userId: req.user._id, author, pages, year })
+		try {
+			await Category.findByIdAndUpdate(catId, {$push:{productId: book._id }})
+			// res.status(200).json()
+		} catch (error) {
+			return res.status(401).json(error)
+		}
         return res.status(201).json({data: book, status: 'Success' })
 	} catch (error) {
-		console.log(error)
         return res.status(500).json(error)
     }
 }
@@ -30,6 +35,18 @@ export const getAllBooks = async(req, res) => {
 		return res.status(200).json({ data: books, status: "Success", count: books.length })
 	} catch (error) {
 		return res.status(401).json(error)
+	}
+}
+//GET BOOKS BY CATEGORY
+export const booksByCategory = async(req, res) => {
+	try {
+		const category = await Category.findById(req.params.id)
+		const books = await Promise.all(category.productId.map(book => {
+			return Book.findById(book)
+		}))
+		return res.status(200).json({ data: books, status: "Success", count: books.length } )
+	} catch(error) {
+		return res.status(400).json(error)
 	}
 }
 // UPDATE BOOK
