@@ -1,0 +1,43 @@
+{
+  "name": "book_store",
+  "version": "1.0.0",
+  "description": "This is a MERN stack book store application that helps users to post their books for sale. ",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "type": "module",
+  "keywords": [
+    "book",
+    "store",
+    "sell",
+    "books",
+    "online",
+    "find",
+    "book",
+    "lovers",
+    "online",
+    "join",
+    "millions",
+    "of",
+    "book",
+    "readers",
+    "online."
+  ],
+  "author": "godfrey ndiritu",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-rate-limit": "^7.1.5",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.3.0",
+    "mongoose": "^8.0.3",
+    "nodemailer": "^6.9.7",
+    "nodemon": "^3.0.2"
+  }
+}
