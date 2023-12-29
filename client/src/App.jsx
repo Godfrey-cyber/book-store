@@ -6,6 +6,7 @@ import BestSelling from "./components/BestSelling.jsx"
 import Featured from "./components/Featured.jsx"
 import MoreBooks from "./components/MoreBooks.jsx"
 import InforSection from "./components/InforSection.jsx"
+import Footer from "./components/Footer.jsx"
 // import image from "./"
 import './App.css'
 
@@ -20,6 +21,7 @@ function App() {
         <Featured />
         <MoreBooks />
         <InforSection />
+        <Footer />
     </section>
   )
 }
