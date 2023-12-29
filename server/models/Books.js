@@ -44,7 +44,7 @@ const BookSchema = new mongoose.Schema({
 		type: mongoose.Schema.ObjectId, 
 		ref: "Category", required: [true, "A Book must belong to a Category"] 
 	}
-}, )
+}, { timestamps: true } )
 export default mongoose.model('Book', BookSchema);
 
 

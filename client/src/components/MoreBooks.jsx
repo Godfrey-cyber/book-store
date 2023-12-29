@@ -2,8 +2,26 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { FaStar, FaStarHalfStroke } from "react-icons/fa6"
 
-const BestSelling = () => {
+const MoreBooks = () => {
+	const [categories, setCategories] = useState([])
 	const [books, setBooks] = useState([])
+	// const 
+	useEffect(() => {
+		const getCategories = async() => {
+			try {
+				const response = await axios.get('http://localhost:5000/api/v1/categories/get-categories')
+				if (response.status === 200) {
+					setCategories(response.data.data)
+					console.log(categories)
+				}
+			} catch(error) {
+				console.error('❗Error fetching data❌:', error.message);
+			}
+		}
+		getCategories()
+	}, [])
+
+
 	// const 
 	useEffect(() => {
 		const getBooks = async() => {
@@ -20,12 +38,26 @@ const BestSelling = () => {
 		getBooks()
 	}, [])
 	return (
-		<section className="flex flex-col w-full bg-red-50">
+		<section className="flex flex-col w-full gap-y-6 bg-white h-fit py-4">
 			{/*title*/}
-			<p className="text-3xl font-semibold text-gray-700 text-center py-16">Best Selling Books Ever</p>
+
+			
 			{/*//NOVELS*/}
-			<div className="w-4/5 mx-auto items-center grid grid-cols-5 gap-4 mb-12">
-				{books && books.slice(0, 5).map(book => (
+			<div className="w-4/5 mx-auto items-center">
+				<div className="grid grid-cols-12 gap-x-4 flex justify-between items-center w-full">
+					<span className="col-span-4 w-full">
+						<p className="text-3xl font-semibold text-gray-700 text-center ">Latest Published items</p>
+					</span>
+					<div className="col-span-8 flex space-x-3 items-center">
+						{categories.length > 0 && categories.slice(0, 5).map(category => (
+							<span key={category._id} className="bg-red-500 text-white font-light text-center text-xs rounded-3xl px-5 py-2 hover:bg-white hover:border hover:border-red-500 hover:text-red-500 transition-all delay-400 cursor-pointer border border-red-400">{category.title}</span>
+						))}
+					</div>
+				</div>
+			</div>
+
+			<div className="w-4/5 mx-auto items-center grid grid-cols-5 gap-x-4 gap-y-6 mb-12">
+				{books && books.slice(6, 16).map(book => (
 					<div key={book._id} className="flex flex-col space-y-1 h-96 w-48 shadow-2xl shadow-gray-200 rounded-md cursor-pointer hover:shadow-2xl hover:shadow-pink-300 transition-all delay-300">
 						<img className="w-full h-72 bg-cover" src={book.photo} alt="" />
 						<div className="flex flex-col space-y-.5 px-2">
@@ -50,4 +82,4 @@ const BestSelling = () => {
 	)
 }
 
-export default BestSelling
+export default MoreBooks

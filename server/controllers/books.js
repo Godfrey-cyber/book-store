@@ -31,7 +31,7 @@ export const getBook = async(req, res)=> {
 // GET ALL BOOKS
 export const getAllBooks = async(req, res) => {
 	try {
-		const books = await Book.find()
+		const books = await Book.find().sort({createdAt: -1})
 		return res.status(200).json({ data: books, status: "Success", count: books.length })
 	} catch (error) {
 		return res.status(401).json(error)

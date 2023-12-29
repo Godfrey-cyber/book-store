@@ -1,3 +1,17 @@
+.navbar {
+  transition: all 0.3s ease;
+
+}
+
+.navbar.scrolled {
+  background-color: #fff; /* Change the background color when scrolled */
+  box-shadow: 0 2px 5px rgb(255,255,255); /* Add a box shadow when scrolled */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
 /*#root {
   max-width: 1280px;
   margin: 0 auto;
