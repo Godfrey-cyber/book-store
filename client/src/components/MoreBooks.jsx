@@ -12,7 +12,7 @@ const MoreBooks = () => {
 				const response = await axios.get('http://localhost:5000/api/v1/categories/get-categories')
 				if (response.status === 200) {
 					setCategories(response.data.data)
-					console.log(categories)
+					// console.log(categories)
 				}
 			} catch(error) {
 				console.error('❗Error fetching data❌:', error.message);
@@ -29,7 +29,7 @@ const MoreBooks = () => {
 				const response = await axios.get('http://localhost:5000/api/v1/books/getAllBooks')
 				if (response.status === 200) {
 					setBooks(response.data.data)
-					console.log(books)
+					// console.log(books)
 				}
 			} catch(error) {
 				console.error('❗Error fetching data❌:', error.message);

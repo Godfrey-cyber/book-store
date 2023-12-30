@@ -14,6 +14,7 @@ const LargeHeader = () => {
     const products = useSelector(state => state.cart.products)
     const cartTotal = useSelector(totalCartCount)
     const items = useSelector(cartItems)
+    console.log(items)
     // scroll
 	useEffect(() => {
 		const handleScroll = () => {
@@ -55,7 +56,7 @@ const LargeHeader = () => {
 	        	<p className="text-sm font-thin text-black cursor-pointer">FAQ</p>
 	        	<p className="text-sm font-thin text-black cursor-pointer">Track Order</p>
 	        	<BsCart className="hover:text-red-600 text-red-500 transition delay-400 text-2xl font-light cursor-pointer mr-3" />
-	        	<span an onClick={() => navigate("/products_cart")} className="flex items-center absolute bottom-7 right-44 bg-red-400 h-6 w-6 justify-center rounded-full text-center text-white text-xs border-2 border-white">{ items > 9 ? "9+" : items }</span>
+	        	<span className="flex items-center absolute bottom-7 right-44 bg-red-400 h-6 w-6 justify-center rounded-full text-center text-white text-xs border-2 border-white">{ items > 9 ? "9+" : items }</span>
 	        	<p className="text-sm font-medium rounded-3xl text-black bg-red-400 rounded-sm px-5 py-2 transition delay-300 cursor-pointer">Sign In</p>
 	        </div>
         </nav>

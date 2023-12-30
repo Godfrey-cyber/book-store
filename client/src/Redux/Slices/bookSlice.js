@@ -3,24 +3,24 @@ import { createSlice } from "@reduxjs/toolkit"
 const bookSlice = createSlice({
 	name: 'books',
 	initialState: [],
-	books: null,
+	book: null,
 	isUploading: false,
-	error: false
+	error: false,
 	reducers: {
 		uploadStart(state, action) {
 			state.isUploading = true
 			state.error = false
-			state.product = null
+			state.book = null
 		},
 		uploadSuccess: (state, action) => {
 			state.isUploading = false
 			state.error = false
-			state.product = action.payload
+			state.book = action.payload
 		},
 		uploadFailure: (state, action) => {
 			state.isUploading = false
 			state.error = true
-			state.product = null
+			state.book = null
 		}
 		// createBook(state, action) {},
 		// updateBook(state, action) {},
@@ -28,6 +28,6 @@ const bookSlice = createSlice({
 	}
 })
 
-const { actions, reducer } = postsSlice // Extract the action creators object and the reducer
-export const { uploadStart, uploadSuccess, uploadFailure } = actions // Extract and export each action creator by name
-export default reducer // Export the reducer, either as a default or named export
+// const { actions, reducer } = bookSlice // Extract the action creators object and the reducer
+export const { uploadStart, uploadSuccess, uploadFailure } = bookSlice.actions // Extract and export each action creator by name
+export default bookSlice.reducer // Export the reducer, either as a default or named export

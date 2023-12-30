@@ -1,10 +1,7 @@
-import { combineReducers } from "@reduxjs/toolkit"
-import bookSlice from "../Slices/bookSlice.js"
-import cartSlice from "../Slices/cartSlice.js"
+import { combineReducers, configureStore } from "@reduxjs/toolkit"
+import rootReducer from "../Reducers/combinedReducers.js"
 
-const store = combineReducers({
-	users: cartSlice
-	books: bookSlice
+export const store = configureStore({
+	reducer: rootReducer
 })
 
-export default store
