@@ -2,7 +2,7 @@ import mongoose from "mongoose"
 
 const BookSchema = new mongoose.Schema({
 	title: { 
-		type: String, required: [true, "A Book must have a title"]
+		type: String, unique: true, required: [true, "A Book must have a title"]
 	 },
 	desc: { 
 		type: String, required: [true, "A Book must have a description"] 
