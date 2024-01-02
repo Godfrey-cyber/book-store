@@ -6,6 +6,7 @@ import InforSection from '../components/InforSection.jsx'
 import Footer from '../components/Footer.jsx'
 import SmallHeader from '../components/SmallHeader.jsx'
 import LargeHeader from '../components/LargeHeader.jsx'
+import Featured from '../components/Featured.jsx'
 
 const Home = () => {
 	return (
@@ -16,6 +17,7 @@ const Home = () => {
 			</div>
 			<MainSection />
 			<BestSelling />
+			<Featured />
 			<MoreBooks />
 			<InforSection />
 			<Footer />

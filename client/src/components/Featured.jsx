@@ -24,8 +24,8 @@ const Featured = () => {
 			<div className="grid grid-cols-12 gap-6 h-4/5">
 				<div className="col-span-8 bg-red-500 p-4 flex space-x-4 items-center">
 					{books && books.slice(0, 1).map(book => (
-						<div className="flex items-center space-x-8">
-							<div key={book._id} className="h-80 w-48 shadow-2xl shadow-gray-200 cursor-pointer hover:shadow-2xl hover:shadow-pink-300 transition-all delay-300">
+						<div key={book._id} className="flex items-center space-x-8">
+							<div className="h-80 w-48 shadow-2xl shadow-gray-200 cursor-pointer hover:shadow-2xl hover:shadow-pink-300 transition-all delay-300">
 								<img className="w-full h-full bg-cover" src={book.photo} alt="" />
 							</div>
 							<div className="flex flex-col space-y-4 ">

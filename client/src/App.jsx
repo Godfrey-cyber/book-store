@@ -9,16 +9,20 @@ import MoreBooks from "./components/MoreBooks.jsx"
 import InforSection from "./components/InforSection.jsx"
 import Footer from "./components/Footer.jsx"
 import Home from "./pages/Home.jsx"
+import BookPage from "./pages/BookPage.jsx"
+import CartPage from "./pages/CartPage.jsx"
 // import image from "./"
 import './App.css'
 
 function App() {
 
   return (
-    <section className="bg-red-50 h-screen w-full ">
+    <section className="bg-red-50 h-screen w-full scroll-smooth">
      <BrowserRouter>
 	    <Routes>
 	    	<Route path="/" element={<Home />} />
+	    	<Route path="/book_details/:id" element={<BookPage />} />
+	    	<Route path="/cart_page" element={<CartPage />} />
 	    	{/*<SmallHeader />
 	        <LargeHeader />
 	        <MainSection />

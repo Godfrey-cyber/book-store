@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import { useNavigate } from "react-router-dom"
 import { FaStar, FaStarHalfStroke } from "react-icons/fa6"
 
 const MoreBooks = () => {
 	const [categories, setCategories] = useState([])
 	const [books, setBooks] = useState([])
+	const navigate = useNavigate()
 	// const 
 	useEffect(() => {
 		const getCategories = async() => {
@@ -58,7 +60,7 @@ const MoreBooks = () => {
 
 			<div className="w-4/5 mx-auto items-center grid grid-cols-5 gap-x-4 gap-y-6 mb-12">
 				{books && books.slice(6, 16).map(book => (
-					<div key={book._id} className="flex flex-col space-y-1 h-96 w-48 shadow-2xl shadow-gray-200 rounded-md cursor-pointer hover:shadow-2xl hover:shadow-pink-300 transition-all delay-300">
+					<div onClick={() => navigate(`/book_details/${book._id}`)} key={book._id} className="flex flex-col space-y-1 h-96 w-48 shadow-2xl shadow-gray-200 rounded-md cursor-pointer hover:shadow-2xl hover:shadow-pink-300 transition-all delay-300">
 						<img className="w-full h-72 bg-cover" src={book.photo} alt="" />
 						<div className="flex flex-col space-y-.5 px-2">
 							<p className="text-sm font-medium text-gray-700">{book.title.length > 20 ? book.title.slice(0, 20)+ '...' : book.title}</p>
