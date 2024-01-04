@@ -1,6 +1,6 @@
 import express from 'express'
 import { createCategory, getAllCategories, getCategory, updateCategory, deleteCategory } from "../controllers/category.js"
-import { protect } from "../middleware/authMiddleware.js"
+import { protect } from "../middleware/authMiddleware.js" // Authentication middleware
 
 const router = express.Router()
 
@@ -13,4 +13,4 @@ router.delete("/delete-category/:id", protect, deleteCategory) // delete categor
 export default router
 
 // :~:~:~:~:~:~:~:~:~:~:~:~:~::~:~::-
-// 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
+// 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

@@ -11,6 +11,7 @@ import Footer from "./components/Footer.jsx"
 import Home from "./pages/Home.jsx"
 import BookPage from "./pages/BookPage.jsx"
 import CartPage from "./pages/CartPage.jsx"
+import SignIn from "./pages/SignIn.jsx"
 // import image from "./"
 import './App.css'
 
@@ -23,6 +24,7 @@ function App() {
 	    	<Route path="/" element={<Home />} />
 	    	<Route path="/book_details/:id" element={<BookPage />} />
 	    	<Route path="/cart_page" element={<CartPage />} />
+	    	<Route path="/sign_in" element={<SignIn />} />
 	    	{/*<SmallHeader />
 	        <LargeHeader />
 	        <MainSection />

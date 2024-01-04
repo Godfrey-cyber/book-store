@@ -30,11 +30,14 @@ const BookSchema = new mongoose.Schema({
 	inStock: { 
 		type: Number, required: [true, "A Book must have a quantity"], default: 1
 	},
+	isbn: {
+		type: Number, required: [true, "A book must have a isbn number"]
+	},
 	price: { 
 		type: Number, required: [true, "A Book must have a price"]
 	},
 	discount: { 
-		type: Number, default: 0
+		type: Number, default: 0,
 	},
 	userId: { 
 		type: mongoose.Schema.ObjectId, ref: "User", 

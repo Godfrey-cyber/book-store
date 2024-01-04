@@ -15,6 +15,7 @@ const cartSlice = createSlice({
 			} else {
 				let tempBook = { ...action.payload, count: 1 }
           		state.books.push(tempBook)
+          		// console.log(state.books)
 			}
 			state.total += action.payload.price;
 		},
