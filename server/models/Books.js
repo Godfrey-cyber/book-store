@@ -31,7 +31,7 @@ const BookSchema = new mongoose.Schema({
 		type: Number, required: [true, "A Book must have a quantity"], default: 1
 	},
 	isbn: {
-		type: Number, required: [true, "A book must have a isbn number"]
+		type: Number, 
 	},
 	price: { 
 		type: Number, required: [true, "A Book must have a price"]

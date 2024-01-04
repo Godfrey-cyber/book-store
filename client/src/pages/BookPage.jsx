@@ -3,15 +3,27 @@ import { useLocation } from 'react-router-dom'
 import { FaStar, FaStarHalfStroke } from "react-icons/fa6"
 import BestSelling from "../components/BestSelling.jsx"
 import axios from 'axios'
+import { useDispatch, useSelector } from 'react-redux'
+import { addBook, items, getTotal, getCartCount, cartItems } from '../Redux/Slices/cartSlice'
 import SmallHeader from "../components/SmallHeader"
 import LargeHeader from "../components/LargeHeader"
 
 const BookPage = () => {
-	const [book, setBook] = useState([])
+	const [book, setBook] = useState({})
+	const [cartBooks, setCartBooks] = useState({})
 	const location = useLocation()
+	const dispatch = useDispatch()
 	const id = location.pathname.split('/')[2]
-	console.log(id)
-	// console.log(location)
+	const etp = useSelector(cartItems)
+	console.log(etp)
+	// add book to cart
+	const addBookToCart = () => {
+		setCount(count + 1)
+		dispatch(addBook({ ...book, count }))
+		dispatch(getTotal())
+		dispatch(getCartCount())
+	}
+	const [count, setCount] = useState(book.count || 0)
 	useEffect(() => {
 		const getBook = async() => {
 			try {
@@ -27,7 +39,7 @@ const BookPage = () => {
 			}
 		}
 		getBook()
-	}, [])
+	}, [id])
 	return (
 		<section className="w-full h-full bg-white">
 			<SmallHeader />
@@ -36,7 +48,7 @@ const BookPage = () => {
 				<div className="col-span-3 flex flex-col space-y-4 h-full">
 					<img className="w-full h-96 my-6 bg-cover group-hover:rounded-t-md transition-all delay-400" src={book.photo} alt="" />
 					<button className="text-sm text-white font-semibold bg-red-400 border border-red-300 hover:bg-white hover:text-red-400 transition-all delay-400 rounded-3xl px-3 py-2">Read</button>
-					<button className="text-sm text-red-400 font-semibold bg-white border border-red-300 hover:bg-red-400 hover:text-white transition-all delay-400 rounded-3xl px-3 py-2">Buy this book</button>
+					<button disabled={count > 1} className="text-sm text-red-400 font-semibold bg-white border border-red-300 hover:bg-red-400 hover:text-white transition-all delay-400 rounded-3xl px-3 py-2">Buy this book</button>
 				</div>
 				<div className="col-span-9 flex flex-col space-y-4 h-full w-full px-10">
 					<p className="text-4xl font-normal tex-gray-700">{book.title}</p>
@@ -57,7 +69,7 @@ const BookPage = () => {
 						<p className="text-gray-700 font-light">Price:</p>
 						<p className="text-red-500 font-light">Ksh. {book.price}</p>
 					</span>
-					<button className="text-sm text-red-400 font-semibold bg-white border border-red-300 hover:bg-red-400 hover:text-white transition-all delay-400 w-2/5 rounded-md px-3 py-2">Add to cart</button>
+					<button onClick={addBookToCart} className="text-sm text-red-400 font-semibold bg-white border border-red-300 hover:bg-red-400 hover:text-white transition-all delay-400 w-2/5 rounded-md px-3 py-2">Add to cart</button>
 					<span className="flex space-x-3 text-sm items-center">
 						<p className="text-gray-700 font-light">First published:</p>
 						<p className="text-red-500 font-light hover:underline">{book.year}</p>
@@ -78,7 +90,7 @@ const BookPage = () => {
 						</span>
 						<span className="flex items-center justify-between">
 							<p className="text-gray-700 font-light text-sm">ISBN</p>
-							<p className="text-gray-700 font-light text-sm">9781982146863 (ISBN10: 1982146869)</p>
+							<p className="text-gray-700 font-light text-sm">{!book.isbn ? '9781982146863 (ISBN10: 1982146869)' : 'ISBN'+ book.isbn}</p>
 						</span>
 						<span className="flex items-center justify-between">
 							<p className="text-gray-700 font-light text-sm">Language</p>
@@ -133,27 +145,27 @@ const BookPage = () => {
 					<div className="flex flex-col space-y-3 my-6 w-full">
 						<span className="flex space-x-2 w-full">
 							<p className="text-sm font-semibold text-gray-700 hover:underline cursor-pointer">5 Star</p>
-							<progress className="w-3/5 rounded-2xl" max="100" value="47"></progress>
+							<progress className="w-3/5 progress rounded-2xl" max="100" value="47"></progress>
 							<p className="text-xs font-light text-gray-700 hover:underline cursor-pointer">1,354 (47%)</p>
 						</span>
 						<span className="flex space-x-2">
 							<p className="text-sm font-semibold text-gray-700 hover:underline cursor-pointer">4 Star</p>
-							<progress className="w-3/5 rounded-2xl" max="100" value="32"></progress>
+							<progress className="w-3/5 progress rounded-2xl" max="100" value="32"></progress>
 							<p className="text-xs font-light text-gray-700 hover:underline cursor-pointer">907 (32%)</p>
 						</span>
 						<span className="flex space-x-2">
 							<p className="text-sm font-semibold text-gray-700 hover:underline cursor-pointer">3 Star</p>
-							<progress className="w-3/5 rounded-2xl" max="100" value="15"></progress>
+							<progress className="w-3/5 progress rounded-2xl" max="100" value="15"></progress>
 							<p className="text-xs font-light text-gray-700 hover:underline cursor-pointer">433 (15%)</p>
 						</span>
 						<span className="flex space-x-2">
 							<p className="text-sm font-semibold text-gray-700 hover:underline cursor-pointer">2 Star</p>
-							<progress className="w-3/5 rounded-2xl" max="100" value="4"></progress>
+							<progress className="w-3/5 progress rounded-2xl" max="100" value="4"></progress>
 							<p className="text-xs font-light text-gray-700 hover:underline cursor-pointer">120 (4%)</p>
 						</span>
 						<span className="flex space-x-2">
 							<p className="text-sm font-semibold text-gray-700 hover:underline cursor-pointer">1 Star</p>
-							<progress className="w-3/5 rounded-2xl" max="100" value="1"></progress>
+							<progress className="w-3/5 progress rounded-2xl" max="100" value="1"></progress>
 							<p className="text-xs font-light text-gray-700 hover:underline cursor-pointer">34 (1%)</p>
 						</span>
 					</div>

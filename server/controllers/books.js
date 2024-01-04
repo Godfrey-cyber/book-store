@@ -3,9 +3,9 @@ import Category from "../models/Category.js"
 
 // CREATE A NEW BOOK
 export const createBook = async(req, res) => {
-	const { title, desc, price, photo, inStock, discount, catId, condition, userId, author, pages, year } = req.body
+	const { title, desc, price, photo, inStock, discount, catId, condition, userId, author, pages, year, isbn } = req.body
 	try {
-		const book = await Book.create({ title, desc, price, photo, inStock, discount, catId, condition, userId: req.user._id, author, pages, year })
+		const book = await Book.create({ title, desc, price, photo, inStock, discount, isbn, catId, condition, userId: req.user._id, author, pages, year })
 		try {
 			await Category.findByIdAndUpdate(catId, {$push:{productId: book._id }})
 			// res.status(200).json()

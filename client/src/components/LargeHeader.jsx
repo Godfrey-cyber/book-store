@@ -10,11 +10,13 @@ const LargeHeader = () => {
 	const [scrolled, setIsScrolled] = useState(false)
 	const navigate = useNavigate()
 	// redux
-	const total = useSelector(selectTotal)
-    const products = useSelector(state => state.cart.products)
+	// const total = useSelector(selectTotal)
+    const books = useSelector(state => state.cart.books)
     const cartTotal = useSelector(totalCartCount)
     const items = useSelector(cartItems)
     console.log(items)
+    console.log(cartTotal)
+    console.log(books)
     // scroll
 	useEffect(() => {
 		const handleScroll = () => {
