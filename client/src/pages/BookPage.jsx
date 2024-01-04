@@ -4,7 +4,7 @@ import { FaStar, FaStarHalfStroke } from "react-icons/fa6"
 import BestSelling from "../components/BestSelling.jsx"
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
-import { addBook, items, getTotal, getCartCount, cartItems } from '../Redux/Slices/cartSlice'
+import { addBook, items, getTotal, getCartCount, cartItems, decrement, increment } from '../Redux/Slices/cartSlice'
 import SmallHeader from "../components/SmallHeader"
 import LargeHeader from "../components/LargeHeader"
 
@@ -16,6 +16,20 @@ const BookPage = () => {
 	const id = location.pathname.split('/')[2]
 	const etp = useSelector(cartItems)
 	console.log(etp)
+	// handle book increase
+	const handleQtyInc = () => {
+		setCount(count + 1)
+		dispatch(increment({id: book._id, count }))
+		dispatch(getTotal())
+		dispatch(getCartCount())
+	}
+	// handle book decrease
+	const handleQtyDec = () => {
+		count > 1 && setCount(count - 1)
+		dispatch(decrement({id: book._id, count }))
+		dispatch(getTotal())
+		dispatch(getCartCount())
+	}
 	// add book to cart
 	const addBookToCart = () => {
 		setCount(count + 1)
@@ -70,6 +84,13 @@ const BookPage = () => {
 						<p className="text-red-500 font-light">Ksh. {book.price}</p>
 					</span>
 					<button onClick={addBookToCart} className="text-sm text-red-400 font-semibold bg-white border border-red-300 hover:bg-red-400 hover:text-white transition-all delay-400 w-2/5 rounded-md px-3 py-2">Add to cart</button>
+					<div className="flex items-center border border-gray-200 rounded-md w-max">
+						<span onClick={() => handleQtyDec()} className="items-center flex text-lg text-gray-500 py-2 px-3 hover:text-white transition delay-300 transition delay-300 cursor-pointer rounded-tl-md rounded-bl-md hover:bg-red-200 bg-gray-200">-</span>
+						<span className="items-center flex w-12">
+							<p className="text-sm text-gray-500 mx-auto">{ count }</p>
+						</span>
+						<span onClick={() => handleQtyInc()} className="items-center flex text-lg text-gray-500 py-2 px-3 hover:text-white transition delay-300 transition delay-300 cursor-pointer rounded-tr-md rounded-br-md hover:bg-green-200 bg-gray-200">+</span>
+					</div>
 					<span className="flex space-x-3 text-sm items-center">
 						<p className="text-gray-700 font-light">First published:</p>
 						<p className="text-red-500 font-light hover:underline">{book.year}</p>
