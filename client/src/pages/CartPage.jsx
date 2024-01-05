@@ -12,12 +12,12 @@ const CartPage = () => {
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
 	const books = useSelector(items)
-	 const cartTotal = useSelector(totalCartCount)
-	 const total = useSelector(selectTotal)
-	 const itemsCount = useSelector(cartItems)
-	 const [count, setCount] = useState(1)
+	const cartTotal = useSelector(totalCartCount)
+	const total = useSelector(selectTotal)
+	const itemsCount = useSelector(cartItems)
+	const [count, setCount] = useState(0)
 
-	 const handleQty = () => {
+	const handleQty = () => {
 		dispatch(getTotal())
 		dispatch(getCartCount())
 	}
@@ -33,6 +33,9 @@ const CartPage = () => {
 		}
 		dispatch(decrement({id: book._id, count }))
 	}
+
+	// let cartIndex = books.findIndex(bookItem => bookItem._id === action.payload.id)
+	
 	console.log(books)
 	return (
 		<section className="w-full h-[100vh]">

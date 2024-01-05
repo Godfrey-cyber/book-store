@@ -15,6 +15,7 @@ const BookPage = () => {
 	const dispatch = useDispatch()
 	const id = location.pathname.split('/')[2]
 	const etp = useSelector(cartItems)
+	const books = useSelector(items)
 	console.log(etp)
 	// handle book increase
 	const handleQtyInc = () => {
@@ -37,14 +38,20 @@ const BookPage = () => {
 		dispatch(getTotal())
 		dispatch(getCartCount())
 	}
+	// check if current book exists in the cart books if it does do not display the add to cart button
+	const checkBookAvailability = () => {
+		return books.findIndex(bookItem => bookItem._id === book._id)
+	}
+	const availability = checkBookAvailability()
+	console.log(availability)
 	const [count, setCount] = useState(book.count || 0)
+	console.log(book)
 	useEffect(() => {
 		const getBook = async() => {
 			try {
 				const response = await axios.get(`http://localhost:5000/api/v1/books/getBook/${id}`)
 				if (response.status === 200) {
 					setBook(response.data.data)
-					console.log(book)
 				} else {
 					console.log('error')
 				}
@@ -83,7 +90,7 @@ const BookPage = () => {
 						<p className="text-gray-700 font-light">Price:</p>
 						<p className="text-red-500 font-light">Ksh. {book.price}</p>
 					</span>
-					<button onClick={addBookToCart} className="text-sm text-red-400 font-semibold bg-white border border-red-300 hover:bg-red-400 hover:text-white transition-all delay-400 w-2/5 rounded-md px-3 py-2">Add to cart</button>
+					<button onClick={addBookToCart} className={`text-sm text-red-400 font-semibold bg-white border border-red-300 hover:bg-red-400 hover:text-white transition-all delay-400 w-2/5 rounded-md px-3 py-2 ${availability >= 0 ? 'hidden' : "inline-flex"}`}>Add to cart</button>
 					<div className="flex items-center border border-gray-200 rounded-md w-max">
 						<span onClick={() => handleQtyDec()} className="items-center flex text-lg text-gray-500 py-2 px-3 hover:text-white transition delay-300 transition delay-300 cursor-pointer rounded-tl-md rounded-bl-md hover:bg-red-200 bg-gray-200">-</span>
 						<span className="items-center flex w-12">
