@@ -18,7 +18,7 @@ import './App.css'
 function App() {
 
   return (
-    <section className="bg-red-50 h-screen w-full scroll-smooth">
+    <section className=" h-auto w-full scroll-smooth">
      <BrowserRouter>
 	    <Routes>
 	    	<Route path="/" element={<Home />} />

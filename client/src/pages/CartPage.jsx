@@ -1,38 +1,82 @@
-import React from 'react'
+import React, { useState, useEffect} from 'react'
 import SmallHeader from "../components/SmallHeader"
 import { FaRegHeart } from "react-icons/fa";
 import { FiPlusCircle, FiMinusCircle } from "react-icons/fi";
+import { RxCross2 } from "react-icons/rx";
 import LargeHeader from "../components/LargeHeader"
+import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { addBook, items, getTotal, getCartCount, totalCartCount } from '../Redux/Slices/cartSlice'
+import { addBook, items, totalCartCount, selectTotal, removeFromCart, deleteAll, increment, cartItems, decrement, getCartCount, getTotal } from '../Redux/Slices/cartSlice'
 
 const CartPage = () => {
 	const dispatch = useDispatch()
+	const navigate = useNavigate()
 	const books = useSelector(items)
 	 const cartTotal = useSelector(totalCartCount)
+	 const total = useSelector(selectTotal)
+	 const itemsCount = useSelector(cartItems)
+	 const [count, setCount] = useState(1)
+
+	 const handleQty = () => {
+		dispatch(getTotal())
+		dispatch(getCartCount())
+	}
+	// increment book
+	const bookIncrement = () => {
+		setCount(count + 1)
+		dispatch(increment({id: book._id, count }))
+	}
+	//decrement book
+	const decrementBook = () => {
+		if (count >= 1) {
+			setCount(count - 1)
+		}
+		dispatch(decrement({id: book._id, count }))
+	}
 	console.log(books)
 	return (
 		<section className="w-full h-[100vh]">
 			<SmallHeader />
 			<LargeHeader />
 			<main className="grid grid-cols-12 gap-8 w-4/5 mx-auto">
-				<div className="col-span-8 h-96 my-2  space-y-4">
-					<p className="text-sm font-semibold text-gray-700 my-4">You have {(books.length)} books in your cart</p>
-					{books && books?.map(book => (
-						<div key={book._id} className="grid grid-cols-12 gap-x-8">
+				<div className="col-span-8 h-96 my-2 space-y-6">
+					<p className="text-sm font-semibold text-gray-700 my-4">You have ({(books.length)}) books in your cart</p>
+					{books.length === 0 ?
+					<div className="h-[80vh] col-span-12 lg:col-span-8 w-full flex flex-col space-y-3 px-4 lg:px-20 my-8 mx-auto justify-center items-center">
+                        <span className="h-44 w-44">
+                            <img src="https://cdn-icons-png.flaticon.com/128/9841/9841570.png" alt="" width={25} height={15} className="w-full h-full object-contain" />
+                        </span>
+                        
+                        <p className="text-sm font-normal text-gray-800 text-center">Already have an account? <span onClick={() => navigate("/register")} className="text-sm text-orange-400 cursor-pointer hover:text-orange-500 transition delay-200">Login</span> to see items in your cart</p>
+                        <button onClick={() => navigate("/")} className="bg-orange-400 w-4/5 text-sm text-white font-normal px-4 py-2 lg:w-2/5 rounded-sm hover:bg-orange-500 bg-orange-400 transition delay">Start Shopping</button>
+                    </div> : books?.map((book, id) => (
+						<div key={id} className="grid grid-cols-12 gap-x-8 border-t border-gray-200 py-4">
 							<div className="col-span-4 h-44 w-28 flex-col">
-								<img className="h-full w-full bg-contain" src={book.photo} alt="" />
+								<img onClick={() => navigate(`/book_details/${book._id}`)} className="h-full w-full bg-contain" src={book.photo} alt="" />
 							</div>
-							<div className="col-span-6 flex-col">
+							
+							<div className="col-span-6 flex flex-col justify-between">
 								<p className="text-sm font-light text-gray-700">{book.title}</p>
+							{/*qty btns*/}
+								<div className="flex items-center border border-gray-200 rounded-md w-max">
+									<button disabled={book.count <= 1} onClick={() => count >= 2 && setCount(count - 1)} onClick={() => dispatch(decrement({id: book._id, count }))} className="items-center flex text-lg text-gray-500 py-2 px-3 hover:text-white transition delay-300 transition delay-300 cursor-pointer rounded-tl-md rounded-bl-md hover:bg-red-200 bg-gray-200">-</button>
+									<span className="items-center flex w-12">
+										<p className="text-sm text-gray-500 mx-auto">{ book.count }</p>
+									</span>
+									<button onClick={() => setCount(count + 1)} onClick={() => dispatch(increment({id: book._id, count }))} className="items-center flex text-lg text-gray-500 py-2 px-3 hover:text-white transition delay-300 transition delay-300 cursor-pointer rounded-tr-md rounded-br-md hover:bg-green-200 bg-gray-200">+</button>
+								</div>
+								<p className="text-lg font-light text-red-400 slashed-zero">KSH: {book.price * book.count}</p>
 							</div>
-							<div className="col-span-2 flex-col">
-								<FaRegHeart className="text-lg text-red-400" />
+							<div className="col-span-2 flex-col flex justify-between">
+								<FaRegHeart className="text-lg text-red-400 h-4 lg:h-6 w-4 lg:w-6 cursor-pointer" />
+								<span onClick={() => dispatch(removeFromCart({ id: book._id }))} className="flex justify-center items-center cursor-pointer rounded-full  bg-red-400 h-9 w-9 text-center">
+	                            <RxCross2 className="h-4 lg:h-6 w-4 lg:w-6 text-white" />
+	                        </span>
 							</div>
 						</div>
 					))}
 				</div>
-				<div className="col-span-4 h-96 my-2 bg-red-400 flex-col space-y-4">
+				<div className="col-span-4 h-96 my-2 bg-gray-200 flex-col space-y-4">
 
 				</div>
 			</main>
