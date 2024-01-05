@@ -47,7 +47,7 @@ const LargeHeader = () => {
 	        	<p className="text-sm font-thin text-black cursor-pointer">Track Order</p>
 	        	<span onClick={() => navigate("/cart_page")} className="cursor-pointer">
 	        		<BsCart className="hover:text-red-600 text-red-500 transition delay-400 text-2xl font-light cursor-pointer mr-3" />
-	        		<span className="flex items-center absolute bottom-7 right-44 bg-red-400 h-6 w-6 justify-center rounded-full text-center text-white text-xs border-2 border-white">{ items > 9 ? "9+" : items }</span>
+	        		<span className="flex items-center absolute bottom-7 right-48 bg-red-400 h-6 w-6 justify-center rounded-full text-center text-white text-xs border-2 border-white">{ items > 9 ? "9+" : items }</span>
 	        	</span>
 	        	<button onClick={() => navigate("/sign_in")} type="button" className="text-sm font-medium border border-red-400 hover:divide-red-500 hover:bg-white text-white rounded-3xl bg-red-400 rounded-3xl hover:text-red-500 px-5 py-2 transition-all delay-300 ease-in-out duration-300 cursor-pointer">Sign In</button>
 	        </div>

@@ -18,7 +18,7 @@ import './App.css'
 function App() {
 
   return (
-    <section className=" h-auto w-full scroll-smooth">
+    <section className="min-h-screen font-['Montserrat'] h-auto w-full scroll-smooth">
      <BrowserRouter>
 	    <Routes>
 	    	<Route path="/" element={<Home />} />

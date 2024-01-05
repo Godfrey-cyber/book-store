@@ -42,7 +42,7 @@ const CartPage = () => {
 			<SmallHeader />
 			<LargeHeader />
 			<main className="grid grid-cols-12 gap-8 w-4/5 mx-auto">
-				<div className="col-span-8 h-96 my-2 space-y-6">
+				<div className="col-span-8 h-fit my-12 space-y-6">
 					<p className="text-sm font-semibold text-gray-700 my-4">You have ({(books.length)}) books in your cart</p>
 					{books.length === 0 ?
 					<div className="h-[80vh] col-span-12 lg:col-span-8 w-full flex flex-col space-y-3 px-4 lg:px-20 my-8 mx-auto justify-center items-center">
@@ -79,8 +79,19 @@ const CartPage = () => {
 						</div>
 					))}
 				</div>
-				<div className="col-span-4 h-96 my-2 bg-gray-200 flex-col space-y-4">
-
+				<div className="col-span-4 h-fit bg-gray-100 flex-col space-y-4 my-12 p-4">
+					<div className="flex-col space-y-4 bg-white w-full p-2 rounded-md">
+						<span className="flex justify-between items-center">
+							<p className="text-lg font-normal text-gray-700 slashed-zero">Subtotal:</p>
+							<p className="text-lg font-normal text-gray-700 slashed-zero">KSH. {total}</p>
+						</span>
+						<span className="flex justify-between items-center">
+							<p className="text-lg font-normal text-gray-700 slashed-zero">Delivery</p>
+							<p className="text-xs font-light text-gray-500 slashed-zero">Depends on location</p>
+						</span>
+					</div>
+					<button className="bg-red-400 rounded-sm p-4 w-full text-center text-white my-4 font-normal hover:bg-red-500 transition-all delay-300 ">CHECKOUT</button>
+					<p className="text-sm font-normal text-gray-600 slashed-zero">Got a <span className="cursor-pointer text-sm font-normal text-red-400">promo or a discount code</span> we've got you covered</p>
 				</div>
 			</main>
 		</section>
