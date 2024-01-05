@@ -26,7 +26,7 @@ const BookPage = () => {
 	}
 	// handle book decrease
 	const handleQtyDec = () => {
-		count > 1 && setCount(count - 1)
+		count >= 2 && setCount(count - 1)
 		dispatch(decrement({id: book._id, count }))
 		dispatch(getTotal())
 		dispatch(getCartCount())
@@ -44,8 +44,25 @@ const BookPage = () => {
 	}
 	const availability = checkBookAvailability()
 	console.log(availability)
-	const [count, setCount] = useState(book.count || 0)
-	console.log(book)
+	// if the book exists then display the count of that particular book
+	const filterBook = books.filter((filteredBook, i) => filteredBook._id === book._id)
+	const { _id: bookId } = filterBook
+	console.log(bookId)
+	console.log(filterBook)
+
+	const arr = Object.keys(filterBook).map(([key, val]) => filterBook[key].count)[0]
+	console.log(typeof(arr))
+
+	
+	for (let i of filterBook) {
+    	console.log(i.count);
+	}
+
+	const iterable = filterBook.forEach(({count, title, desc }) => desc)
+	console.log(iterable)
+	
+	const [count, setCount] = useState(arr ? arr : 0)
+	console.log(arr)
 	useEffect(() => {
 		const getBook = async() => {
 			try {
@@ -90,13 +107,14 @@ const BookPage = () => {
 						<p className="text-gray-700 font-light">Price:</p>
 						<p className="text-red-500 font-light">Ksh. {book.price}</p>
 					</span>
-					<button onClick={addBookToCart} className={`text-sm text-red-400 font-semibold bg-white border border-red-300 hover:bg-red-400 hover:text-white transition-all delay-400 w-2/5 rounded-md px-3 py-2 ${availability >= 0 ? 'hidden' : "inline-flex"}`}>Add to cart</button>
+					<button onClick={addBookToCart} className={`text-sm text-red-400 font-semibold bg-white border text-center flex justify-center border-red-300 hover:bg-red-400 hover:text-white transition-all delay-400 w-2/5 rounded-md px-3 py-2 ${availability >= 0 ? 'hidden' : "inline-flex"}`}>Add to cart</button>
+				{/*qty buttons*/}
 					<div className="flex items-center border border-gray-200 rounded-md w-max">
-						<span onClick={() => handleQtyDec()} className="items-center flex text-lg text-gray-500 py-2 px-3 hover:text-white transition delay-300 transition delay-300 cursor-pointer rounded-tl-md rounded-bl-md hover:bg-red-200 bg-gray-200">-</span>
-						<span className="items-center flex w-12">
-							<p className="text-sm text-gray-500 mx-auto">{ count }</p>
-						</span>
-						<span onClick={() => handleQtyInc()} className="items-center flex text-lg text-gray-500 py-2 px-3 hover:text-white transition delay-300 transition delay-300 cursor-pointer rounded-tr-md rounded-br-md hover:bg-green-200 bg-gray-200">+</span>
+						<button disabled={arr <= 1} onClick={() => handleQtyDec()} className="items-center flex text-lg text-gray-500 py-2 px-3 hover:text-white transition delay-300 transition delay-300 cursor-pointer rounded-tl-md rounded-bl-md hover:bg-red-200 bg-gray-200">-</button>
+						<button className="items-center flex w-12">
+							<p className="text-sm text-gray-500 mx-auto">{ arr ? arr : 0 }</p>
+						</button>
+						<button disabled={availability <= 0} onClick={() => handleQtyInc()} className="items-center flex text-lg text-gray-500 py-2 px-3 hover:text-white transition delay-300 transition delay-300 cursor-pointer rounded-tr-md rounded-br-md hover:bg-green-200 bg-gray-200">+</button>
 					</div>
 					<span className="flex space-x-3 text-sm items-center">
 						<p className="text-gray-700 font-light">First published:</p>
