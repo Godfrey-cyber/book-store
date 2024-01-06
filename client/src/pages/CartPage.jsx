@@ -50,8 +50,8 @@ const CartPage = () => {
                             <img src="https://cdn-icons-png.flaticon.com/128/9841/9841570.png" alt="" width={25} height={15} className="w-full h-full object-contain" />
                         </span>
                         
-                        <p className="text-sm font-normal text-gray-800 text-center">Already have an account? <span onClick={() => navigate("/register")} className="text-sm text-orange-400 cursor-pointer hover:text-orange-500 transition delay-200">Login</span> to see items in your cart</p>
-                        <button onClick={() => navigate("/")} className="bg-orange-400 w-4/5 text-sm text-white font-normal px-4 py-2 lg:w-2/5 rounded-sm hover:bg-orange-500 bg-orange-400 transition delay">Start Shopping</button>
+                        <p className="text-sm font-normal text-gray-800 text-center">Already have an account? <span onClick={() => navigate("/register")} className="text-sm text-red-400 cursor-pointer hover:text-red-500 transition-all delay-200">Login</span> to see items in your cart</p>
+                        <button onClick={() => navigate("/")} className="w-4/5 text-sm text-white font-normal px-4 py-2 lg:w-2/5 rounded-sm hover:bg-red-500 bg-red-400 transition delay">Start Shopping</button>
                     </div> : books?.map((book, id) => (
 						<div key={id} className="grid grid-cols-12 gap-x-8 border-t border-gray-200 py-4">
 							<div className="col-span-4 h-44 w-28 flex-col">

@@ -28,7 +28,7 @@
   .cta_p {
     @apply text-sm font-thin text-black cursor-pointer
   }
-   /*==========small header=============*/
+   /*========================small header========================*/
   .media_icon {
     @apply text-gray-400 transition delay-300 text-sm cursor-pointer
   }
@@ -37,6 +37,69 @@
   }
   .cta_media {
     @apply flex space-x-2 font-light text-sm text-gray-600 items-center
+  }
+  /*=========================BestSelling==================*/
+  .best_div {
+    @apply hover:animate-pulse relative flex flex-col space-y-1 h-96 w-48 shadow-2xl shadow-gray-200 rounded-md cursor-pointer hover:shadow-2xl hover:shadow-pink-300 transition-all delay-300
+  }
+  .best_img {
+    @apply w-full h-72 bg-cover transition-all delay-300
+  }
+  .best_icons {
+    @apply text-sm text-red-500
+  }
+  /*=======================Featured============================*/
+  .featured_div {
+    @apply h-80 w-48 shadow-2xl shadow-gray-200 cursor-pointer hover:shadow-2xl hover:shadow-pink-300 transition-all delay-300
+  }
+  .featured_btn {
+    @apply bg-red-500 rounded-3xl text-white hover:text-red-500 hover:bg-white px-2 py-3 w-2/5 border-white border transition-all delay-300
+  }
+  /*====================footer=============================*/
+  .footer_icons {
+    @apply text-gray-500 transition delay-300 text-lg cursor-pointer
+  }
+  .footer_p {
+    @apply text-sm font-semibold text-gray-700 my-4
+  }
+  .footer_text {
+    @apply text-sm font-light text-gray-700 hover:underline cursor-pointer hover:text-red-400 transition-all delay-300
+  }
+  /*===================mainsection====================*/
+  .mainsection_span {
+    @apply absolute top-1/2 right-1/2 -translate-y-1/2 translate-x-1/2 flex flex-col items-center space-y-6 w-1/2 mx-auto text-2xl font-light
+  }
+  /*======================morebooks=======================*/
+  .category_span {
+    @apply bg-red-500 text-white font-light text-center text-xs rounded-3xl px-5 py-2 hover:bg-white hover:border hover:border-red-500 hover:text-red-500 transition-all delay-300 cursor-pointer border border-red-400
+  }
+  .morebooks_div {
+    @apply flex flex-col space-y-1 h-96 w-48 shadow-2xl shadow-gray-200 rounded-md cursor-pointer hover:shadow-2xl hover:shadow-pink-300 transition-all delay-300
+  }
+  /*=====================bookpage==========================*/
+  .bookpage_btn {
+    @apply font-semibold border text-sm transition-all delay-300 rounded-3xl px-3 py-2
+  }
+  .page_icon {
+    @apply text-3xl text-red-500
+  }
+  .bookpage_btn {
+    @apply text-sm text-red-400 font-semibold bg-white border text-center flex justify-center border-red-300 hover:bg-red-400 hover:text-white transition-all delay-300 w-2/5 rounded-md px-3 py-2 cursor-pointer
+  }
+  .dec_btn {
+    @apply items-center flex text-lg text-gray-500 py-2 px-3 hover:text-white transition delay-300 transition delay-300 cursor-pointer rounded-tl-md rounded-bl-md hover:bg-red-200 bg-gray-200
+  }
+  .inc_btn {
+    @apply items-center flex text-lg text-gray-500 py-2 px-3 hover:text-white transition delay-300 transition delay-300 cursor-pointer rounded-tr-md rounded-br-md hover:bg-green-200 bg-gray-200
+  }
+  .book_desc {
+    @apply text-gray-700 font-light text-sm
+  }
+  .book_rating {
+    @apply text-sm font-semibold text-gray-700 hover:underline cursor-pointer
+  }
+  .rating_num {
+    @apply text-xs font-light text-gray-700 hover:underline cursor-pointer
   }
 }
 

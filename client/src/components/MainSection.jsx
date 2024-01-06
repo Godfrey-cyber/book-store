@@ -6,7 +6,7 @@ const MainSection = () => {
 			<div className=" bg-white mx-auto w-4/5 h-full">
 				<span className=" w-full h-full">
 					<img className="w-full h-full bg-contain bg-no-repeat bg-center" src="https://149502452.v2.pressablecdn.com/wp-content/uploads/2020/11/the-dichotomy-of-leadership-book-01-1-2048x1152.jpeg" alt="" />
-					<span className="absolute top-1/2 right-1/2 -translate-y-1/2 translate-x-1/2 flex flex-col items-center space-y-6 w-1/2 mx-auto text-2xl font-light">
+					<span className="mainsection_span">
 						<p className="text-sm font-light text-black bg-white rounded-full px-6 py-1 cursor-pointer">Science Fiction</p>
 						<p className="text-5xl font-normal text-white">The History</p>
 						<p className="text-5xl font-normal text-white">of Phipino</p>

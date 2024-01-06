@@ -46,13 +46,13 @@ const MoreBooks = () => {
 			
 			{/*//NOVELS*/}
 			<div className="w-4/5 mx-auto items-center">
-				<div className="grid grid-cols-12 gap-x-4 flex justify-between items-center w-full">
-					<span className="col-span-4 w-full">
-						<p className="text-3xl font-semibold text-gray-700 text-center ">Latest Published items</p>
+				<div className="flex justify-between bg-red-transparent items-center w-full py-4">
+					<span className="">
+						<p className="text-2xl font-semibold text-gray-700 text-center ">Latest Published items</p>
 					</span>
-					<div className="col-span-8 flex space-x-3 items-center">
+					<div className="flex space-x-2 items-center">
 						{categories.length > 0 && categories.slice(0, 5).map(category => (
-							<span key={category._id} className="bg-red-500 text-white font-light text-center text-xs rounded-3xl px-5 py-2 hover:bg-white hover:border hover:border-red-500 hover:text-red-500 transition-all delay-400 cursor-pointer border border-red-400">{category.title}</span>
+							<span key={category._id} className="category_span">{category.title}</span>
 						))}
 					</div>
 				</div>
@@ -60,16 +60,16 @@ const MoreBooks = () => {
 
 			<div className="w-4/5 mx-auto items-center grid grid-cols-5 gap-x-4 gap-y-6 mb-12">
 				{books && books.slice(6, 16).map(book => (
-					<div onClick={() => navigate(`/book_details/${book._id}`)} key={book._id} className="flex flex-col space-y-1 h-96 w-48 shadow-2xl shadow-gray-200 rounded-md cursor-pointer hover:shadow-2xl hover:shadow-pink-300 transition-all delay-300">
+					<div onClick={() => navigate(`/book_details/${book._id}`)} key={book._id} className="morebooks_div">
 						<img className="w-full h-72 bg-cover" src={book.photo} alt="" />
 						<div className="flex flex-col space-y-.5 px-2">
 							<p className="text-sm font-medium text-gray-700">{book.title.length > 20 ? book.title.slice(0, 20)+ '...' : book.title}</p>
 							<p className="text-sm font-light text-gray-500">{!book.author ? "J. R Rain" : book.author}</p>
 							<span className="flex items-center">
-								<FaStar className="text-sm text-red-500" />
-								<FaStar className="text-sm text-red-500" />
-								<FaStar className="text-sm text-red-500" />
-								<FaStar className="text-sm text-red-500" />
+								<FaStar className="best_icons" />
+								<FaStar className="best_icons" />
+								<FaStar className="best_icons" />
+								<FaStar className="best_icons" />
 								<FaStarHalfStroke className="text-sm text-red-500" />
 							</span>
 							<span className="flex items-center justify-between">

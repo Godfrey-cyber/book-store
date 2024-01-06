@@ -20,14 +20,14 @@ const SmalHeader = () => {
 					</div>
 				</div>
 				{/*SELL A BOOK*/}
-				<p className="text-sm font-light hover:text-gray-700 hover:text-red-500 hover:font-medium transition-all delay-300 text-gray-600 cursor-pointer">Sell a book</p>
+				<p className="sell_book">Sell a book</p>
 				{/*//cta*/}
 				<div className="flex space-x-3 px-20 items-center">
-					<span className="flex space-x-2 font-light text-sm text-gray-600 items-center">
+					<span className="cta_media">
 						<FaPhoneAlt className="hover:text-red-600 media_icon" />
 						<p className="text-sm font-light text-gray-600">reallygreat@gmail.com</p>	 
 					</span>
-					<span className="flex space-x-2 font-light text-sm text-gray-600 items-center">
+					<span className="cta_media">
 						<IoMdMail className="hover:text-red-600 media_icon" />
 						<p className="text-sm font-light text-gray-600">+254 7123 8456</p>
 					</span>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom'
-import { FaStar, FaStarHalfStroke } from "react-icons/fa6"
+import { useLocation, useNavigate } from 'react-router-dom'
+import { FaStar, FaStarHalfStroke, FaArrowRightLong } from "react-icons/fa6"
 import BestSelling from "../components/BestSelling.jsx"
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
@@ -12,6 +12,7 @@ const BookPage = () => {
 	const [book, setBook] = useState({})
 	const [cartBooks, setCartBooks] = useState({})
 	const location = useLocation()
+	const navigate = useNavigate()
 	const dispatch = useDispatch()
 	const id = location.pathname.split('/')[2]
 	const etp = useSelector(cartItems)
@@ -92,10 +93,10 @@ const BookPage = () => {
 					<p className="text-4xl font-normal tex-gray-700">{book.title}</p>
 					<p className="text-lg font-light tex-gray-700 cursor-pointer hover:underline">{book.author}</p>
 					<span className="flex items-center cursor-pointer">
-						<FaStar className="text-3xl text-red-500" />
-						<FaStar className="text-3xl text-red-500" />
-						<FaStar className="text-3xl text-red-500" />
-						<FaStar className="text-3xl text-red-500" />
+						<FaStar className="page_icon" />
+						<FaStar className="page_icon" />
+						<FaStar className="page_icon" />
+						<FaStar className="page_icon" />
 						<FaStarHalfStroke className="text-3xl text-red-500" />
 					</span>
 					<span className="flex items-center space-x-3">
@@ -107,14 +108,16 @@ const BookPage = () => {
 						<p className="text-gray-700 font-light">Price:</p>
 						<p className="text-red-500 font-light">Ksh. {book.price}</p>
 					</span>
-					<button onClick={addBookToCart} className={`text-sm text-red-400 font-semibold bg-white border text-center flex justify-center border-red-300 hover:bg-red-400 hover:text-white transition-all delay-400 w-2/5 rounded-md px-3 py-2 ${availability >= 0 ? 'hidden' : "inline-flex"}`}>Add to cart</button>
+					{availability >= 0 ? <button onClick={() => navigate("/cart_page")} className="flex items-center bookpage_btn">Go to cart <FaArrowRightLong className="ml-2" /></button> : 
+					<button onClick={addBookToCart} className="bookpage_btn">Add to cart</button>
+					}
 				{/*qty buttons*/}
 					<div className="flex items-center border border-gray-200 rounded-md w-max">
-						<button disabled={arr <= 1} onClick={() => handleQtyDec()} className="items-center flex text-lg text-gray-500 py-2 px-3 hover:text-white transition delay-300 transition delay-300 cursor-pointer rounded-tl-md rounded-bl-md hover:bg-red-200 bg-gray-200">-</button>
-						<button className="items-center flex w-12">
+						<button disabled={arr <= 1} onClick={handleQtyDec} className="dec_btn">-</button>
+						<span className="items-center flex w-12">
 							<p className="text-sm text-gray-500 mx-auto">{ arr ? arr : 0 }</p>
-						</button>
-						<button disabled={availability <= 0} onClick={() => handleQtyInc()} className="items-center flex text-lg text-gray-500 py-2 px-3 hover:text-white transition delay-300 transition delay-300 cursor-pointer rounded-tr-md rounded-br-md hover:bg-green-200 bg-gray-200">+</button>
+						</span>
+						<button disabled={availability <= 0} onClick={() => handleQtyInc()} className="inc_btn">+</button>
 					</div>
 					<span className="flex space-x-3 text-sm items-center">
 						<p className="text-gray-700 font-light">First published:</p>
@@ -127,20 +130,20 @@ const BookPage = () => {
 					<div className="flex flex-col space-y-4 my-8 w-1/2">
 						<p className="text-gray-700 font-semibold text-md">This edition</p>
 						<span className="flex items-center justify-between">
-							<p className="text-gray-700 font-light text-sm">Format</p>
-							<p className="text-gray-700 font-light text-sm">{book.pages} pages, Hardcover</p>
+							<p className="book_desc">Format</p>
+							<p className="book_desc">{book.pages} pages, Hardcover</p>
 						</span>
 						<span className="flex items-center justify-between">
-							<p className="text-gray-700 font-light text-sm">Published</p>
-							<p className="text-gray-700 font-light text-sm">{book.year} by {book.author}</p>
+							<p className="book_desc">Published</p>
+							<p className="book_desc">{book.year} by {book.author}</p>
 						</span>
 						<span className="flex items-center justify-between">
-							<p className="text-gray-700 font-light text-sm">ISBN</p>
-							<p className="text-gray-700 font-light text-sm">{!book.isbn ? '9781982146863 (ISBN10: 1982146869)' : 'ISBN'+ book.isbn}</p>
+							<p className="book_desc">ISBN</p>
+							<p className="book_desc">{!book.isbn ? '9781982146863 (ISBN10: 1982146869)' : 'ISBN'+ book.isbn}</p>
 						</span>
 						<span className="flex items-center justify-between">
-							<p className="text-gray-700 font-light text-sm">Language</p>
-							<p className="text-gray-700 font-light text-sm">English</p>
+							<p className="book_desc">Language</p>
+							<p className="book_desc">English</p>
 						</span>
 					</div>
 					{/*<div className="flex flex-col space-y-4 border-b border-gray-700">
@@ -190,29 +193,29 @@ const BookPage = () => {
 					</div>
 					<div className="flex flex-col space-y-3 my-6 w-full">
 						<span className="flex space-x-2 w-full">
-							<p className="text-sm font-semibold text-gray-700 hover:underline cursor-pointer">5 Star</p>
+							<p className="book_rating">5 Star</p>
 							<progress className="w-3/5 progress rounded-2xl" max="100" value="47"></progress>
-							<p className="text-xs font-light text-gray-700 hover:underline cursor-pointer">1,354 (47%)</p>
+							<p className="rating_num">1,354 (47%)</p>
 						</span>
 						<span className="flex space-x-2">
-							<p className="text-sm font-semibold text-gray-700 hover:underline cursor-pointer">4 Star</p>
+							<p className="book_rating">4 Star</p>
 							<progress className="w-3/5 progress rounded-2xl" max="100" value="32"></progress>
-							<p className="text-xs font-light text-gray-700 hover:underline cursor-pointer">907 (32%)</p>
+							<p className="rating_num">907 (32%)</p>
 						</span>
 						<span className="flex space-x-2">
-							<p className="text-sm font-semibold text-gray-700 hover:underline cursor-pointer">3 Star</p>
+							<p className="book_rating">3 Star</p>
 							<progress className="w-3/5 progress rounded-2xl" max="100" value="15"></progress>
-							<p className="text-xs font-light text-gray-700 hover:underline cursor-pointer">433 (15%)</p>
+							<p className="rating_num">433 (15%)</p>
 						</span>
 						<span className="flex space-x-2">
-							<p className="text-sm font-semibold text-gray-700 hover:underline cursor-pointer">2 Star</p>
+							<p className="book_rating">2 Star</p>
 							<progress className="w-3/5 progress rounded-2xl" max="100" value="4"></progress>
-							<p className="text-xs font-light text-gray-700 hover:underline cursor-pointer">120 (4%)</p>
+							<p className="rating_num">120 (4%)</p>
 						</span>
 						<span className="flex space-x-2">
-							<p className="text-sm font-semibold text-gray-700 hover:underline cursor-pointer">1 Star</p>
+							<p className="book_rating">1 Star</p>
 							<progress className="w-3/5 progress rounded-2xl" max="100" value="1"></progress>
-							<p className="text-xs font-light text-gray-700 hover:underline cursor-pointer">34 (1%)</p>
+							<p className="rating_num">34 (1%)</p>
 						</span>
 					</div>
 				</div>

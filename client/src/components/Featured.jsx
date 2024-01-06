@@ -25,7 +25,7 @@ const Featured = () => {
 				<div className="col-span-8 bg-red-500 p-4 flex space-x-4 items-center">
 					{books && books.slice(0, 1).map(book => (
 						<div key={book._id} className="flex items-center space-x-8">
-							<div className="h-80 w-48 shadow-2xl shadow-gray-200 cursor-pointer hover:shadow-2xl hover:shadow-pink-300 transition-all delay-300">
+							<div className="featured_div">
 								<img className="w-full h-full bg-cover" src={book.photo} alt="" />
 							</div>
 							<div className="flex flex-col space-y-4 ">
@@ -42,7 +42,7 @@ const Featured = () => {
 									</span>
 									<p className="text-xs font-light text-white">(120 Review)</p>
 								</div>
-								<button className="bg-red-500 rounded-3xl text-white hover:text-red-500 hover:bg-white px-2 py-3 w-2/5 border-white border transition-all delay-300">View More</button>
+								<button className="featured_btn">View More</button>
 							</div>
 						</div>
 					))}

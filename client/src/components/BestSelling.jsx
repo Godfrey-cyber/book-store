@@ -57,19 +57,19 @@ const BestSelling = () => {
 			{/*//NOVELS*/}
 			<div className="w-4/5 mx-auto items-center grid grid-cols-5 gap-4 mb-12">
 				{books && books.slice(0, 5).map(book => (
-					<div onClick={() => navigate(`/book_details/${book._id}`)} key={book._id} className="hover:animate-pulse relative group flex flex-col space-y-1 h-96 w-48 shadow-2xl shadow-gray-200 rounded-md cursor-pointer hover:shadow-2xl hover:shadow-pink-300 transition-all delay-400">
-						<img className="w-full h-72 bg-cover group-hover:rounded-t-md transition-all delay-400" src={book.photo} alt="" />
+					<div onClick={() => navigate(`/book_details/${book._id}`)} key={book._id} className="best_div group">
+						<img className="best_img group-hover:rounded-t-md" src={book.photo} alt="" />
 						{/*<span onClick={addBookToCart} className={`hidden ${checkBookAvailability(book._id) >= 0 ? 'bg-green-500' : ''} group-hover:inline absolute z-10 text-white bg-red-500 rounded-bl-full p-2 text-center items-center flex -top-1 right-0 group-hover:rounded-tr-md transition-all delay-300`}>
 							<MdAddShoppingCart className="text-lg ml-1" />
-						</span>*/}
+						</span>q*/}
 						<div className="flex flex-col space-y-.5 px-2">
 							<p className="text-sm font-medium text-gray-700">{book.title.length > 20 ? book.title.slice(0, 20)+ '...' : book.title}</p>
 							<p className="text-sm font-light text-gray-500">{!book.author ? "J. R Rain" : book.author}</p>
 							<span className="flex items-center">
-								<FaStar className="text-sm text-red-500" />
-								<FaStar className="text-sm text-red-500" />
-								<FaStar className="text-sm text-red-500" />
-								<FaStar className="text-sm text-red-500" />
+								<FaStar className="best_icons" />
+								<FaStar className="best_icons" />
+								<FaStar className="best_icons" />
+								<FaStar className="best_icons" />
 								<FaStarHalfStroke className="text-sm text-red-500" />
 							</span>
 							<span className="flex items-center justify-between">
