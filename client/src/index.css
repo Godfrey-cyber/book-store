@@ -2,6 +2,44 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  /*==========large header=============*/
+  .large_header {
+    @apply transition delay-300 flex h-[60px] relative justify-between items-center w-full bg-gray-100 shadow-xl shadow-gray-600 border-b z-10 border-gray-300 px-20
+  }
+  .search_div {
+    @apply flex justify-between items-center rounded-3xl border border-gray-500 w-96 h-11 p-1
+  }
+  .search_input {
+    @apply w-full h-full outline-none border-none rounded-3xl bg-transparent px-3 text-sm font-light text-gray-600
+  }
+  .search_icon {
+    @apply hover:text-red-600 text-red-500 transition delay-300 text-2xl font-light cursor-pointer mr-3
+  }
+  .signin_btn {
+    @apply text-sm font-medium border border-red-400 hover:divide-red-500 hover:bg-white text-white rounded-3xl bg-red-400 rounded-3xl hover:text-red-500 px-5 py-2 transition-all delay-300 ease-in-out duration-300 cursor-pointer
+  }
+  .cta_icon {
+    @apply hover:text-red-600 text-red-500 transition delay-300 text-2xl font-light cursor-pointer mr-3
+  }
+  .cta_span {
+    @apply flex items-center absolute bottom-7 right-48 bg-red-400 h-6 w-6 justify-center rounded-full text-center text-white text-xs border-2 border-white
+  }
+  .cta_p {
+    @apply text-sm font-thin text-black cursor-pointer
+  }
+   /*==========small header=============*/
+  .media_icon {
+    @apply text-gray-400 transition delay-300 text-sm cursor-pointer
+  }
+   .sell_book {
+    @apply text-sm font-light hover:text-gray-700 hover:text-red-500 hover:font-medium hover:underline transition-all delay-300 text-gray-600 cursor-pointer
+  }
+  .cta_media {
+    @apply flex space-x-2 font-light text-sm text-gray-600 items-center
+  }
+}
+
 /*:root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
