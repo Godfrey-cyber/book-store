@@ -1,7 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lemon&display=swap');
 *{
   padding: 0;
   margin: 0;
+  box-sizing: border-box;
 }
 
 .navbar {
@@ -31,9 +33,12 @@
 progress[value]::-webkit-progress-bar {
   background-color: pink;
   border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+  /*box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5) inset;*/
 }
+.overay {
+  background-color: rgba(0, 0, 0, 0.35)
 
+}
 /*#root {
   max-width: 1280px;
   margin: 0 auto;

@@ -48,7 +48,7 @@ const LargeHeader = () => {
 	        		<BsCart className="cta_icon" />
 	        		<span className="cta_span">{ items > 9 ? "9+" : items }</span>
 	        	</span>
-	        	<button onClick={() => navigate("/sign_in")} type="button" className="signin_btn">Sign In</button>
+	        	<button onClick={() => navigate("/log_in")} type="button" className="signin_btn">Log In</button>
 	        </div>
         </nav>
 	)

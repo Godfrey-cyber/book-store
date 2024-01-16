@@ -99,7 +99,25 @@
     @apply text-sm font-semibold text-gray-700 hover:underline cursor-pointer
   }
   .rating_num {
-    @apply text-xs font-light text-gray-700 hover:underline cursor-pointer
+    @apply text-xs font-light text-gray-700 hover:underline cursor-pointer  
+  }
+  .input {
+    @apply bg-transparent px-2 py-1 text-xs font-normal text-gray-600 border-none outline-none
+  }
+  .input_span {
+    @apply bg-transparent w-full h-8 rounded-md border border-gray-400
+  }
+  .input_span_1 {
+    @apply bg-transparent w-1/2 h-8 rounded-md border border-gray-400
+  }
+  .image_span {
+    @apply flex justify-between items-center w-full h-8 rounded-sm border border-black bg-transparent p-1 cursor-pointer
+  }
+  .form_image {
+    @apply h-full w-auto rounded-sm
+  }
+  .form_text {
+    @apply text-xs font-normal text-gray-700 mr-2
   }
 }
 

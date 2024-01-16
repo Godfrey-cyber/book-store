@@ -43,7 +43,7 @@ const CartPage = () => {
 			<LargeHeader />
 			<main className="grid grid-cols-12 gap-8 w-4/5 mx-auto">
 				<div className="col-span-8 h-fit my-12 space-y-6">
-					<p className="text-sm font-semibold text-gray-700 my-4">You have ({(books.length)}) books in your cart</p>
+					<p className="text-sm font-light font-['Lemon'] text-gray-700 my-4">You have ({(books.length)}) books in your cart</p>
 					{books.length === 0 ?
 					<div className="h-[80vh] col-span-12 lg:col-span-8 w-full flex flex-col space-y-3 px-4 lg:px-20 my-8 mx-auto justify-center items-center">
                         <span className="h-44 w-44">
@@ -83,7 +83,7 @@ const CartPage = () => {
 					<div className="flex-col space-y-4 bg-white w-full p-2 rounded-md">
 						<span className="flex justify-between items-center">
 							<p className="text-lg font-normal text-gray-700 slashed-zero">Subtotal:</p>
-							<p className="text-lg font-normal text-gray-700 slashed-zero">KSH. {total}</p>
+							<p className="text-sm font-['Lemon'] font-normal text-gray-700 slashed-zero">KSH. {total}</p>
 						</span>
 						<span className="flex justify-between items-center">
 							<p className="text-lg font-normal text-gray-700 slashed-zero">Delivery</p>
