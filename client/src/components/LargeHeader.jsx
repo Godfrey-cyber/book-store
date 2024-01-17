@@ -2,13 +2,16 @@ import React, { useEffect, useState } from 'react'
 import { FaSearch } from "react-icons/fa"
 import { BsCart } from "react-icons/bs"
 import { useNavigate } from "react-router-dom"
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import { selectTotal, totalCartCount, cartItems } from "../Redux/Slices/cartSlice.js"
+import { selectUser } from "../Redux/Slices/userSlice.js"
+import { logoutUser } from "../Redux/apiCalls"
 import '../App.css'
 
 const LargeHeader = () => {
 	const [scrolled, setIsScrolled] = useState(false)
 	const navigate = useNavigate()
+	const dispatch = useDispatch()
 	// redux
 	// const total = useSelector(selectTotal)
     const books = useSelector(state => state.cart.books)
@@ -17,6 +20,10 @@ const LargeHeader = () => {
     console.log(items)
     console.log(cartTotal)
     console.log(books)
+    const user = useSelector(selectUser)
+	console.log(useSelector(state => state.user?.currentUser))
+	const loginRoute = '/log_in'
+	const logoutRoute = '/sign_up'
     // scroll
 	useEffect(() => {
 		const handleScroll = () => {
@@ -28,6 +35,7 @@ const LargeHeader = () => {
 		}
 
 	}, [scrolled])
+	
 	return (
 		<nav className={`navbar ${scrolled ? 'scrolled' : ''} large_header`}>
         	<div className="flex space-x-3 items-center">
@@ -48,7 +56,8 @@ const LargeHeader = () => {
 	        		<BsCart className="cta_icon" />
 	        		<span className="cta_span">{ items > 9 ? "9+" : items }</span>
 	        	</span>
-	        	<button onClick={() => navigate("/log_in")} type="button" className="signin_btn">Log In</button>
+	        	{!user ? <button onClick={() => navigate("/sign_up")} type="button" className="signin_btn">Log In</button> : 
+	        	<button onClick={() => logoutUser(dispatch)} type="button" className="signin_btn">Log Out</button>}
 	        </div>
         </nav>
 	)

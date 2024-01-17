@@ -6,11 +6,8 @@ const UserSchema = new mongoose.Schema({
 	username: { type: String, unique: true, min: 4, required: true },
     password: { type: String, required: true },
 	email: { type: String, required: true },
-    verified: {
-        type: Boolean,
-        required: true,
-        default: false
-    }
+    isAdmin: { type: Boolean, default: false, required: true },
+    verified: { type: Boolean, required: true, default: false }
 }, { timestamps: true })
 
 //encrypt password before saving

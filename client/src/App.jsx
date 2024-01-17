@@ -17,7 +17,7 @@ import SignUp from "./pages/SignUp.jsx"
 import './App.css'
 
 function App() {
-
+	
   return (
     <section className="min-h-screen font-['Montserrat'] h-auto w-full scroll-smooth">
      <BrowserRouter>

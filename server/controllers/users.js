@@ -10,23 +10,23 @@ export const registerUser = async (req, res) => {
     const { username, password, email } = req.body
     
     if (!email || !password || !username) {
-        return res.status(400).json({msg: '❌ Please enter all fields'})
+        return res.status(400).json({ msg: '❌ Please enter all fields' })
     }
     //verify email
     let emailFormat = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
 
     if (!email.match(emailFormat)) {
-        return res.status(400).json({msg: "❌ Please enter a valid email address❗"})
+        return res.status(400).json({ msg: "❌ Please enter a valid email address❗" })
     }
     //verify password
     let passValid=  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
     if (!password.match(passValid)) {
-        return res.status(400).json({msg: "🚫 Password must be between 8 to 15 characters containing at least one lowercase letter, one uppercase letter, one numeric digit, and one special character"})
+        return res.status(400).json({ msg: "🚫 Password must be between 8 to 15 characters containing at least one lowercase letter, one uppercase letter, one numeric digit, and one special character" })
     }
     // check if user exists
     const userExists = await User.findOne({email})
     if (userExists) {
-        return res.status(400).json({msg: "🚫 This email already exists!"})
+        return res.status(400).json({ msg: "🚫 This email already exists!" })
     }
     //register new user & assign token
     try {
@@ -147,7 +147,7 @@ export const logout = async(req, res) => {
         sameSite: "none",
         secure: true
     })
-    return res.status(200).json({message: "Successfully logged out"})
+    return res.status(200).json({message: "User has beeb successfully logged out"})
 }
 //UPDATE USER
 export const userUpdate = async (req, res) => {
@@ -245,6 +245,6 @@ export const forgotPassword = async(req, res) => {
         return res.status(200).json({ success: true, message: "📧 Password reset link sent to your email" })
     } catch(error) {
         console.log(error)
-        res.status(500).json({ status: 'Failure', msg: error })
+        return res.status(500).json({ status: 'Failure', msg: error })
     }
 }
