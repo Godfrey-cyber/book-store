@@ -1,10 +1,57 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from "react-router-dom"
 import { image_1, image_2, image_3 } from "../assets/images"
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
+import { useSelector, useDispatch } from "react-redux"
+import { selectUser, registerSuccess, registerStart, registerFailure, registerError } from "../Redux/Slices/userSlice.js"
+import { register } from "../Redux/apiCalls"
+import axios from "axios"
 import '../App.css'
 
 const SignIn = () => {
+	const [formData, setFormData] = useState({email: "", username: "", password: "" })
+    const [toggle, setToggle] = useState(false)
 	const navigate = useNavigate()
+	const dispatch = useDispatch()
+	// toggle passwordview
+     const togglePassword = () => {
+    	setToggle(prev => !prev)
+    }
+    // collect form data
+    const onChange = (event) => {
+        setFormData(prev => ({...prev, [event.target.name]: event.target.value}))
+    }
+    const { username, password, email } = formData
+    // submit form data
+    const handleSubmit = async (event) => {
+        event.preventDefault()
+        dispatch(registerStart())
+        if (!password == "" || !email == "" || !username == "") {
+			try {
+				const res = await axios.post("http://localhost:5000/api/v1/users/register", formData)
+				if (res.status === 200 || res.statusText === 'OK') {
+					dispatch(registerSucces(res.data))
+					setFormData({email: "", password: ""})
+					navigate('/')
+				}
+			} catch (error) {
+				if (error || !res.status === 200 || !res.statusText === 'OK') {
+					console.log(error?.response?.data?.msg)
+					console.log(error)
+					dispatch(registerFailure(error?.response?.data?.msg))
+				}
+			}
+		}
+    }
+    // check pasword length
+    const checkPassword = (password) => {
+        if (password.length < 8) {
+            return 'Password must be greater than 8!'
+        }
+    }
+    const userError = useSelector(registerError)
+    const { isFetching, error, errMsg } = useSelector(state => state.user)
+    console.log(userError)
 	return (
 		<section className="bg-gray-500 grid grid-cols-12 w-full min-h-screen">
 			<div className="relative col-span-7 flex-col bg-red-400 h-full">
@@ -18,21 +65,20 @@ const SignIn = () => {
 					</span>
 					{/*<div className="flex items-center w-full space-x-2 overflow-x-none bg-red-400">*/}
 						<span className="input_span">
-							<input className="input" placeholder='Username' type="text" id="" />
+							<input onChange={onChange} className="input" placeholder='Username' value={username} name="username" type="text" id="" />
 						</span>
 						{/*<span className="input_span">
 							<input className="input" placeholder='Last Name' type="text" id="" />
 						</span>*/}
 					{/*</div>*/}
 					<span className="input_span">
-						<input className="input" placeholder='Enter Email' type="email" id="" />
+						<input onChange={onChange} className="input" placeholder='Enter Email' value={email} name="email" type="email" id="" />
 					</span>
 					<span className="input_span">
-						<input className="input" placeholder='Enter Password' type="password" id="" />
+						<input onChange={onChange} value={password} name="password" className="input" placeholder='Enter Password' type={!toggle ? "password" : "text"} />
+						{toggle ? <FaRegEyeSlash onClick={togglePassword} className="mr-2 text-lg text-gray-600 cursor-pointer" /> : <FaRegEye onClick={togglePassword} className="mr-2 text-lg text-gray-600 cursor-pointer" />}
 					</span>
-					<span className="input_span">
-						<input className="input" placeholder='Confirm Password' type="password" id="" />
-					</span>
+					
 					<span className="flex items-center space-x-1">
 						<hr className="border border-gray-600 w-full" />
 						<p className="text-sm text-gray-500">or</p>
@@ -52,7 +98,8 @@ const SignIn = () => {
 							<p className="form_text">Sign In with Apple</p>
 						</span>
 					</div>
-					<button type="submit" className="bg-red-400 text-sm text-white font-semibold py-2 rounded-md w-full">Create Account</button>
+					{error && <p className="text-xs font-medium text-red-400">{userError}</p>}
+					<button onClick={handleSubmit} type="submit" className="bg-red-400 text-sm text-white font-semibold py-2 rounded-md w-full">Create Account</button>
 					<div className="text-xs font-normal text-gray-700">Already have an account? <span onClick={() => navigate('/log_in')} className="text-red-400 hover:underline cursor-pointer">Log In</span></div>
 				</form>
 			</div>

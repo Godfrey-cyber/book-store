@@ -30,3 +30,18 @@ export const logoutUser = async (dispatch) => {
 		}
 	}
 }
+
+export const register = async (dispatch, data) => {
+	dispatch(registerStart())
+	try {
+		const res = await axios.post("http://localhost:5000/api/v1/users/register", data)
+		if (res.status === 200 || res.statusText === 'OK') {
+			dispatch(registerSucces(res.data))
+		}
+	} catch (error) {
+		if (error || !res.status === 200 || !res.statusText === 'OK') {
+			console.log(error?.response?.data?.msg)
+			dispatch(registerFailure(error?.response?.data?.msg))
+		}
+	}
+}
