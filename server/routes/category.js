@@ -13,4 +13,4 @@ router.delete("/delete-category/:id", protect, deleteCategory) // delete categor
 export default router
 
 // :~:~:~:~:~:~:~:~:~:~:~:~:~::~:~::-
-// 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
+// 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
