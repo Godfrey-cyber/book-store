@@ -13,44 +13,59 @@ const userSlice = createSlice({
 		loginStart: (state) => {
 			state.isFetching = true
 			state.error = false
-			// state.errMsg = false
+			state.errMsg = null
+			state.currentUser = null
 		},
 		loginSuccess: (state, action) => {
 			state.isFetching = false
 			state.error = false
 			state.currentUser = action.payload
+			state.errMsg = action.payload
 		},
 		loginFailure: (state, action) => {
 			state.isFetching = false
 			state.error = true
 			state.errMsg = action.payload
+			state.currentUser = null
 		},
 		//register user
 		registerStart: (state) => {
 			state.isFetching = true
 			state.error = false
+			state.currentUser = null
+			state.errMsg = null
 		},
 		registerSuccess: (state, action) => {
 			state.isFetching = false
 			state.error = false
 			state.currentUser = action.payload
+			state.errMsg = null
 		},
 		registerFailure: (state, action) => {
 			state.isFetching = false
 			state.error = true
+			state.currentUser = null
+			state.errMsg = action.payload
 		},
 		logoutStart: (state) => {
 			state.isFetching = true
 			// state.currentUser = null
+			state.error = false
+			state.currentUser = null
+			state.errMsg = null
 		},
 		logoutSuccess: (state) => {
 			state.isFetching = false
 			state.currentUser = null
+			state.errMsg = null
+			state.error = false
 		}
 		,
 		logoutFailure: (state) => {
 			state.isFetching = false
 			state.currentUser = null
+			state.error = true
+			// state.errMsg = action.payload
 		}
 	}
 })

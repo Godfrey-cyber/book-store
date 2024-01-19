@@ -42,6 +42,7 @@ const SignIn = () => {
 				}
 			}
 		}
+		
     }
     // check pasword length
     const checkPassword = (password) => {
@@ -99,7 +100,7 @@ const SignIn = () => {
 						</span>
 					</div>
 					{error && <p className="text-xs font-medium text-red-400">{userError}</p>}
-					<button onClick={handleSubmit} type="submit" className="bg-red-400 text-sm text-white font-semibold py-2 rounded-md w-full">Create Account</button>
+					<button onSubmit={handleSubmit} type="submit" className="bg-red-400 text-sm text-white font-semibold py-2 rounded-md w-full">Create Account</button>
 					<div className="text-xs font-normal text-gray-700">Already have an account? <span onClick={() => navigate('/log_in')} className="text-red-400 hover:underline cursor-pointer">Log In</span></div>
 				</form>
 			</div>
