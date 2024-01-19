@@ -17,11 +17,7 @@ const LargeHeader = () => {
     const books = useSelector(state => state.cart.books)
     const cartTotal = useSelector(totalCartCount)
     const items = useSelector(cartItems)
-    console.log(items)
-    console.log(cartTotal)
-    console.log(books)
     const user = useSelector(selectUser)
-	console.log(useSelector(state => state.user?.currentUser))
 	const loginRoute = '/log_in'
 	const logoutRoute = '/sign_up'
     // scroll

@@ -13,6 +13,7 @@ import '../App.css'
 const Login = () => {
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
+	const [errorMessage, setErrorMessage] = useState('')
 
 	const [formData, setFormData] = useState({ email: "", password: "" })
 	const [toggle, setToggle] = useState(false)
@@ -29,7 +30,6 @@ const Login = () => {
         event.preventDefault()
         dispatch(loginStart())
         if (!email == "" || !password == "") {
-            // login(dispatch, formData)
 			try {
 				const res = await axios.post("http://localhost:5000/api/v1/users/login", formData, { withCredentials: true })
 				if (res.status === 200 || res.statusText === 'OK') {
@@ -48,10 +48,13 @@ const Login = () => {
 				
 				console.log(err.response.data.msg)
 			}
-        }
-    }
+        } else {
+    		console.log('Soory! Cannot log you without credentials')
+    		setErrorMessage("Soory! Cannot log you without credentials")
+    	}
+    } 
     const user = useSelector(selectUser)
-    const userError = useSelector(loginError)
+    const userError = useSelector(loginError) || errorMessage
     const { isFetching, error, errMsg } = useSelector(state => state.user)
     const data = useSelector(state => state.user)
     console.log(data)

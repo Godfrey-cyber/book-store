@@ -48,7 +48,7 @@ export const registerUser = async (req, res) => {
     } catch(error) {
         if (error) {
             console.log(error)
-			return res.status(500).json("There was an error, please try again later")
+			return res.status(500).json({msg: "Something went wrong! Please try again later"})
 		}
     }
 }
@@ -120,7 +120,7 @@ export const login = async(req, res) => {
     }catch(error) {
         if (error) {
             console.log(error)
-            return res.status(500).json("There was an error, please try again later")
+            return res.status(500).json({msg: "Something went wrong! Please try again later"})
         }
     }
 }

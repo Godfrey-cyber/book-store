@@ -15,7 +15,6 @@ const BestSelling = () => {
 	const dispatch = useDispatch()
 	const location = useLocation().pathname.split("/")[2]
 	const prods = useSelector(items)
-	console.log(prods)
 	const [quantity, setQuantity] = useState(0)
 	const cartCount = useSelector(state => state.cart.totalCount)
 	const cartTotal = useSelector(state => state.cart.total)

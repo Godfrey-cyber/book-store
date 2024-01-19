@@ -41,8 +41,9 @@ const SignIn = () => {
 					dispatch(registerFailure(error?.response?.data?.msg))
 				}
 			}
+		} else {
+			console.log("Please Enter all fields")
 		}
-		
     }
     // check pasword length
     const checkPassword = (password) => {
@@ -66,14 +67,14 @@ const SignIn = () => {
 					</span>
 					{/*<div className="flex items-center w-full space-x-2 overflow-x-none bg-red-400">*/}
 						<span className="input_span">
-							<input onChange={onChange} className="input" placeholder='Username' value={username} name="username" type="text" id="" />
+							<input onChange={onChange} className="input" placeholder='Username' value={username} name="username" type="text" />
 						</span>
 						{/*<span className="input_span">
-							<input className="input" placeholder='Last Name' type="text" id="" />
+							<input className="input" placeholder='Last Name' type="text" />
 						</span>*/}
 					{/*</div>*/}
 					<span className="input_span">
-						<input onChange={onChange} className="input" placeholder='Enter Email' value={email} name="email" type="email" id="" />
+						<input onChange={onChange} className="input" placeholder='Enter Email' value={email} name="email" type="email" />
 					</span>
 					<span className="input_span">
 						<input onChange={onChange} value={password} name="password" className="input" placeholder='Enter Password' type={!toggle ? "password" : "text"} />
@@ -100,7 +101,7 @@ const SignIn = () => {
 						</span>
 					</div>
 					{error && <p className="text-xs font-medium text-red-400">{userError}</p>}
-					<button onSubmit={handleSubmit} type="submit" className="bg-red-400 text-sm text-white font-semibold py-2 rounded-md w-full">Create Account</button>
+					<button onClick={handleSubmit} type="submit" className="bg-red-400 text-sm text-white font-semibold py-2 rounded-md w-full">Create Account</button>
 					<div className="text-xs font-normal text-gray-700">Already have an account? <span onClick={() => navigate('/log_in')} className="text-red-400 hover:underline cursor-pointer">Log In</span></div>
 				</form>
 			</div>
