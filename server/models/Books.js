@@ -48,6 +48,9 @@ const BookSchema = new mongoose.Schema({
 		ref: "Category", required: [true, "A Book must belong to a Category"] 
 	}
 }, { timestamps: true } )
+
+BookSchema.index({ '$**': 'text' })
+
 export default mongoose.model('Book', BookSchema);
 
 

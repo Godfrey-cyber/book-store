@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
+import axios from 'axios'
 import { FaSearch } from "react-icons/fa"
 import { BsCart } from "react-icons/bs"
 import { useNavigate } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import { selectTotal, totalCartCount, cartItems } from "../Redux/Slices/cartSlice.js"
 import { selectUser } from "../Redux/Slices/userSlice.js"
+import { selectBook } from "../Redux/Slices/bookSlice.js"
 import { logoutUser } from "../Redux/apiCalls"
 import '../App.css'
 
@@ -12,6 +14,8 @@ const LargeHeader = () => {
 	const [scrolled, setIsScrolled] = useState(false)
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
+	const [searchTerm, setSearchTerm] = useState("")
+	const [searchResults, setSearchResults] = useState([])
 	// redux
 	// const total = useSelector(selectTotal)
     const books = useSelector(state => state.cart.books)
@@ -31,6 +35,28 @@ const LargeHeader = () => {
 		}
 
 	}, [scrolled])
+	console.log(searchTerm)
+
+	useEffect(() => {
+		const handleSearch = async () => {
+			// event.preventDefault()
+			try {
+				const response = await axios.get(`http://localhost:5000/api/v1/books/getAllBooks?q=${searchTerm}`)
+				if (response.status === 200 || response.statusText === 'OK') {
+					setSearchResults(response.data.data)
+					console.log(searchResults)
+				}
+			} catch (error) {
+				if (error || !res.status === 200 || !res.statusText === 'OK') {
+					console.log(error)
+				}
+			}
+		}
+		handleSearch()
+	}, [searchTerm])
+	
+
+	const { isFetching, error, errMsg } = useSelector(state => state.user)
 	
 	return (
 		<nav className={`navbar ${scrolled ? 'scrolled' : ''} large_header`}>
@@ -40,9 +66,28 @@ const LargeHeader = () => {
 	        	</span>
         	</div>
 	        {/*SEARCH*/}
-	        <div className="search_div">
-	        	<input type="text" className="search_input" placeholder="Search book by author, title or publisher" />
-	        	<FaSearch className="search_icon" />
+	        <div className="flex flex-col relative">
+		        <div className="search_div">
+		        	<input value={searchTerm} onChange={(event) => setSearchTerm(event.target.value)} type="text" className="search_input" placeholder="Search book by author, title or publisher" />
+		        	<FaSearch className="search_icon" />
+		        </div>
+		        {searchTerm && <div className="flex-col space-y-2 rounded-md bg-white shadow shadow-gray-200 min-h-[400px] min-w-[400px] absolute top-14 p-4">
+		        	<span className="flex items-center w-full h-8 border-b border-gray-400">
+		        		<span className="flex text-sm font-normal text-gray-800">Search results for <p className="text-sm font-semibold text-gray-800 ml-2">"{searchTerm}"</p></span>
+		        	</span>
+		        	{
+		        		searchResults && searchResults.map(book => (
+		        			<div key={book._id} onClick={() => navigate(`/book_details/${book._id}`)} className="group flex space-x-3 cursor-pointer hover:bg-gray-100">
+		        				<img src={book.photo} className="h-24 w-16 rounded" alt="" />
+		        				<span className="flex flex-col justify-between p-2">
+		        					<p className="text-sm font-semibold text-gray-800 group-hover:text-red-400 transition-all delay-200">{book.title}</p>
+		        					<p className="text-xs font-normal text-gray-700">{book.author}</p>
+		        				</span>
+		        			</div>
+		        		))
+		        	}
+		        </div>
+		    }
 	        </div>
 	        {/*CTA'S*/}
 	        <div className="flex space-x-4 items-center">

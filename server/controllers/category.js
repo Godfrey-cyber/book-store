@@ -16,8 +16,10 @@ export const createCategory = async(req, res) => {
 
 //GET ALL CATEGORIES
 export const getAllCategories = async(req, res) => {
+	const searchTerm = req.query.q
+	console.log(searchTerm)
 	try {
-		const categories = await Category.find()
+		const categories = searchTerm ? await Category.find({ $text: { $search: searchTerm } }) : await Category.find()
 		return res.status(200).json({ data: categories, status: "Success", count: categories.length })
 	} catch (error) {
 		return res.status(401).json(error)

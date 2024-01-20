@@ -68,7 +68,7 @@ const BookPage = () => {
 		const getBook = async() => {
 			try {
 				const response = await axios.get(`http://localhost:5000/api/v1/books/getBook/${id}`)
-				if (response.status === 200) {
+				if (response.status === 200 || response.statusText === 'OK') {
 					setBook(response.data.data)
 				} else {
 					console.log('error')

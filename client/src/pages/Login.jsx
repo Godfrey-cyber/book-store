@@ -50,7 +50,6 @@ const Login = () => {
 			}
         } else {
     		console.log('Soory! Cannot log you without credentials')
-    		setErrorMessage("Soory! Cannot log you without credentials")
     	}
     } 
     const user = useSelector(selectUser)

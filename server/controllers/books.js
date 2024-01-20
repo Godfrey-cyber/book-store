@@ -24,17 +24,19 @@ export const getBook = async(req, res)=> {
 		const book = await Book.findById(req.params.id)
 		return res.status(200).json({ data: book, status: 'Success'})
 	} catch (error) {
-		return res.status(401).json(error)
+		return res.status(401).json({msg: "Something went wrong"})
 	}
 }
 
 // GET ALL BOOKS
 export const getAllBooks = async(req, res) => {
+	const searchTerm = req.query.q
+	console.log(searchTerm)
 	try {
-		const books = await Book.find().sort({ createdAt: -1 })
+		const books = searchTerm ? await Book.find({ $text: { $search: searchTerm } }) : await Book.find().sort({ createdAt: -1 })
 		return res.status(200).json({ data: books, status: "Success", count: books.length })
 	} catch (error) {
-		return res.status(401).json(error)
+		return res.status(401).json({msg: "Something went wrong"})
 	}
 }
 //GET BOOKS BY CATEGORY

@@ -29,13 +29,14 @@ const SignIn = () => {
         if (!password == "" || !email == "" || !username == "") {
 			try {
 				const res = await axios.post("http://localhost:5000/api/v1/users/register", formData)
-				if (res.status === 200 || res.statusText === 'OK') {
-					dispatch(registerSucces(res.data))
-					setFormData({email: "", password: ""})
-					navigate('/')
+				if (res.status === 201 || res.statusText === 'OK') {
+					dispatch(registerSuccess(res.data))
+					setFormData({email: "", password: "", username: ""})
+					console.log(res)
+					navigate("/")
 				}
 			} catch (error) {
-				if (error || !res.status === 200 || !res.statusText === 'OK') {
+				if (error || !res.status === 201 || !res.statusText === 'OK') {
 					console.log(error?.response?.data?.msg)
 					console.log(error)
 					dispatch(registerFailure(error?.response?.data?.msg))

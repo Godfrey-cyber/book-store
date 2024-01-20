@@ -23,5 +23,6 @@ const CategorySchema = new mongoose.Schema({
  //  	},
 }, { timestamps: true }, { autoIndex: false })
 
+CategorySchema.index({ '$**': 'text' })
 
 export default mongoose.model('Category', CategorySchema);

@@ -17,7 +17,10 @@ const MoreBooks = () => {
 					// console.log(categories)
 				}
 			} catch(error) {
-				console.error('❗Error fetching data❌:', error.message);
+				if (!response.status === 200 || !response.statusText === 'OK') {
+					console.error('❗Error fetching data❌:', error.message);
+					// console.log(categories)
+				}
 			}
 		}
 		getCategories()
