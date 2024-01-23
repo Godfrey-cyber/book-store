@@ -6,6 +6,7 @@ import { MdAddShoppingCart } from "react-icons/md";
 import { FaStar, FaStarHalfStroke } from "react-icons/fa6"
 import { useDispatch, useSelector } from 'react-redux'
 import { addBook, items, getTotal, getCartCount } from '../Redux/Slices/cartSlice.js'
+import Book from "./Book.jsx"
 
 const BestSelling = () => {
 	const [books, setBooks] = useState([])
@@ -44,7 +45,9 @@ const BestSelling = () => {
 					// console.log(books)
 				}
 			} catch(error) {
-				console.error('❗Error fetching data❌:', error.message);
+				if (error || !res.status === 200 || !res.statusText === 'OK') {
+					console.log(error)
+				}
 			}
 		}
 		getBooks()
@@ -56,27 +59,7 @@ const BestSelling = () => {
 			{/*//NOVELS*/}
 			<div className="w-4/5 mx-auto items-center grid grid-cols-5 gap-4 mb-12">
 				{books && books.slice(0, 5).map(book => (
-					<div onClick={() => navigate(`/book_details/${book._id}`)} key={book._id} className="best_div group">
-						<img className="best_img group-hover:rounded-t-md" src={book.photo} alt="" />
-						{/*<span onClick={addBookToCart} className={`hidden ${checkBookAvailability(book._id) >= 0 ? 'bg-green-500' : ''} group-hover:inline absolute z-10 text-white bg-red-500 rounded-bl-full p-2 text-center items-center flex -top-1 right-0 group-hover:rounded-tr-md transition-all delay-300`}>
-							<MdAddShoppingCart className="text-lg ml-1" />
-						</span>q*/}
-						<div className="flex flex-col space-y-.5 px-2">
-							<p className="text-sm font-medium text-gray-700">{book.title.length > 20 ? book.title.slice(0, 20)+ '...' : book.title}</p>
-							<p className="text-sm font-light text-gray-500">{!book.author ? "J. R Rain" : book.author}</p>
-							<span className="flex items-center">
-								<FaStar className="best_icons" />
-								<FaStar className="best_icons" />
-								<FaStar className="best_icons" />
-								<FaStar className="best_icons" />
-								<FaStarHalfStroke className="text-sm text-red-500" />
-							</span>
-							<span className="flex items-center justify-between">
-								<p className="text-xs font-light text-gray-700">(120 Review)</p>
-								<p className="text-lg font-light text-red-500">Ksh. {book.price}</p>
-							</span>
-						</div>
-					</div>
+					<Book book={book} />
 				))}
 			</div>
 		</section>
@@ -110,3 +93,6 @@ export default BestSelling
 //        	\/\/\/
 //        	 \/\/
 //        	  \/
+
+
+

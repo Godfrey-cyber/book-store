@@ -16,6 +16,7 @@ const LargeHeader = () => {
 	const dispatch = useDispatch()
 	const [searchTerm, setSearchTerm] = useState("")
 	const [searchResults, setSearchResults] = useState([])
+	const [loading, setLoading] = useState(true)
 	// redux
 	// const total = useSelector(selectTotal)
     const books = useSelector(state => state.cart.books)
@@ -41,9 +42,10 @@ const LargeHeader = () => {
 		const handleSearch = async () => {
 			// event.preventDefault()
 			try {
-				const response = await axios.get(`http://localhost:5000/api/v1/books/getAllBooks?q=${searchTerm}`)
+				const response = await axios.get(`http://localhost:5000/api/v1/books/getAllBooks?search=${searchTerm}`)
 				if (response.status === 200 || response.statusText === 'OK') {
 					setSearchResults(response.data.data)
+					setLoading(false)
 					console.log(searchResults)
 				}
 			} catch (error) {
@@ -75,8 +77,7 @@ const LargeHeader = () => {
 		        	<span className="flex items-center w-full h-8 border-b border-gray-400">
 		        		<span className="flex text-sm font-normal text-gray-800">Search results for <p className="text-sm font-semibold text-gray-800 ml-2">"{searchTerm}"</p></span>
 		        	</span>
-		        	{
-		        		searchResults && searchResults.map(book => (
+		        	{!loading ? searchResults && searchResults.map(book => (
 		        			<div key={book._id} onClick={() => navigate(`/book_details/${book._id}`)} className="group flex space-x-3 cursor-pointer hover:bg-gray-100">
 		        				<img src={book.photo} className="h-24 w-16 rounded" alt="" />
 		        				<span className="flex flex-col justify-between p-2">
@@ -84,8 +85,7 @@ const LargeHeader = () => {
 		        					<p className="text-xs font-normal text-gray-700">{book.author}</p>
 		        				</span>
 		        			</div>
-		        		))
-		        	}
+		        		)) : <p className="">loading</p>}
 		        </div>
 		    }
 	        </div>
