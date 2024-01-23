@@ -40,9 +40,8 @@ const BestSelling = () => {
 		const getBooks = async() => {
 			try {
 				const response = await axios.get('http://localhost:5000/api/v1/books/getAllBooks')
-				if (response.status === 200) {
+				if (response.status === 200 || res.statusText === 'OK') {
 					setBooks(response.data.data)
-					// console.log(books)
 				}
 			} catch(error) {
 				if (error || !res.status === 200 || !res.statusText === 'OK') {
@@ -59,7 +58,7 @@ const BestSelling = () => {
 			{/*//NOVELS*/}
 			<div className="w-4/5 mx-auto items-center grid grid-cols-5 gap-4 mb-12">
 				{books && books.slice(0, 5).map(book => (
-					<Book book={book} />
+					<Book key={book._id} book={book} />
 				))}
 			</div>
 		</section>
@@ -75,9 +74,9 @@ export default BestSelling
 //          /\/\
 //         /\/\/\
 //        /\/\/\/\
-// 	  /\/\/\/\/\
-// 	 /\/\/\/\/\/\
-// 	/\/\/\/\/\/\/\
+// 	     /\/\/\/\/\
+// 	    /\/\/\/\/\/\
+// 	   /\/\/\/\/\/\/\
 //    /\/\/\/\/\/\/\/\
 //   /\/\/\/\/\/\/\/\/\
 //  /\/\/\/\/\/\/\/\/\/\
@@ -90,9 +89,9 @@ export default BestSelling
 //      \/\/\/\/\/\/
 //       \/\/\/\/\/
 //        \/\/\/\/
-//        	\/\/\/
-//        	 \/\/
-//        	  \/
+//         \/\/\/
+//        	\/\/
+//        	 \/
 
 
 

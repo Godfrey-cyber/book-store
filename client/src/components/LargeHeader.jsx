@@ -46,7 +46,6 @@ const LargeHeader = () => {
 				if (response.status === 200 || response.statusText === 'OK') {
 					setSearchResults(response.data.data)
 					setLoading(false)
-					console.log(searchResults)
 				}
 			} catch (error) {
 				if (error || !res.status === 200 || !res.statusText === 'OK') {

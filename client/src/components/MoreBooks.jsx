@@ -46,10 +46,6 @@ const MoreBooks = () => {
 	}, [])
 	return (
 		<section className="flex flex-col w-full gap-y-6 bg-white h-fit py-4">
-			{/*title*/}
-
-			
-			{/*//NOVELS*/}
 			<div className="w-4/5 mx-auto items-center">
 				<div className="flex justify-between bg-red-transparent items-center w-full py-4">
 					<span className="">
@@ -62,10 +58,9 @@ const MoreBooks = () => {
 					</div>
 				</div>
 			</div>
-
 			<div className="w-4/5 mx-auto items-center grid grid-cols-5 gap-x-4 gap-y-6 mb-12">
 				{books && books.slice(6, 16).map(book => (
-					<Book book={book} />
+					<Book key={book._id} book={book} />
 				))}
 			</div>
 		</section>

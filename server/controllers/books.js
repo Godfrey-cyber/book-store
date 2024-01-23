@@ -30,7 +30,8 @@ export const getBook = async(req, res)=> {
 
 // GET ALL BOOKS
 export const getAllBooks = async(req, res) => {
-	const searchTerm = req.query.q
+	const searchTerm = req.query.search
+	console.log(searchTerm)
 	try {
 		const books = searchTerm ? await Book.find({ $text: { $search: searchTerm } }) : await Book.find().sort({ createdAt: -1 })
 		return res.status(200).json({ data: books, status: "Success", count: books.length })

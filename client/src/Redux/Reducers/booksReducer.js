@@ -1,8 +1,8 @@
 import { combineReducers } from '@reduxjs/toolkit';
-import counterReducer from '../features/counter/counterSlice';
+import bookSlice from '../Slices/bookSlice';
 
 const rootReducer = combineReducers({
-  counter: counterReducer,
+  book: bookSlice,
   // Add other reducers here
 });
 

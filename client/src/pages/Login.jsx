@@ -37,9 +37,6 @@ const Login = () => {
 					setFormData({email: "", password: ""})
            			navigate('/')
 				}
-				
-				console.log(res.data)
-				console.log(res)
 			} catch (err) {
 				if (err || !res.status === 200 || !res.statusText === 'OK') {
 					dispatch(loginFailure(err.response.data.msg))
