@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { FaStar, FaStarHalfStroke, FaArrowRightLong } from "react-icons/fa6"
 import BestSelling from "../components/BestSelling.jsx"
 import axios from 'axios'
+import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux'
 import { addBook, items, getTotal, getCartCount, cartItems, decrement, increment } from '../Redux/Slices/cartSlice'
 import SmallHeader from "../components/SmallHeader"
@@ -24,6 +25,7 @@ const BookPage = () => {
 		dispatch(increment({id: book._id, count }))
 		dispatch(getTotal())
 		dispatch(getCartCount())
+		toast.success("Increased quantity by 1")
 	}
 	// handle book decrease
 	const handleQtyDec = () => {
@@ -31,6 +33,7 @@ const BookPage = () => {
 		dispatch(decrement({id: book._id, count }))
 		dispatch(getTotal())
 		dispatch(getCartCount())
+		toast.error("Decreased quantity by 1")
 	}
 	// add book to cart
 	const addBookToCart = () => {
@@ -38,6 +41,7 @@ const BookPage = () => {
 		dispatch(addBook({ ...book, count }))
 		dispatch(getTotal())
 		dispatch(getCartCount())
+		toast.success("Success🎊 book added to cart")
 	}
 	// check if current book exists in the cart books if it does do not display the add to cart button
 	const checkBookAvailability = () => {

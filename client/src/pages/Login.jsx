@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 import 'react-toastify/dist/ReactToastify.css';
 import { image_3, image_2, image_1 } from "../assets/images"
@@ -36,17 +36,17 @@ const Login = () => {
 					dispatch(loginSuccess(res.data))
 					setFormData({email: "", password: ""})
            			navigate('/')
+           			toast.success("Successfully Logged in🥇")
 				}
 			} catch (err) {
 				if (err || !res.status === 200 || !res.statusText === 'OK') {
 					dispatch(loginFailure(err.response.data.msg))
 					setFormData({email: "", password: ""})
 				}
-				
-				console.log(err.response.data.msg)
+				toast.error(err?.response?.data?.msg)
 			}
         } else {
-    		console.log('Soory! Cannot log you without credentials')
+    		toast.error('Soory! Cannot log you without credentials')
     	}
     } 
     const user = useSelector(selectUser)

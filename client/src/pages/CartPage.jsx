@@ -6,6 +6,7 @@ import { RxCross2 } from "react-icons/rx";
 import LargeHeader from "../components/LargeHeader"
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { toast } from 'react-toastify';
 import { addBook, items, totalCartCount, selectTotal, removeFromCart, deleteAll, increment, cartItems, decrement, getCartCount, getTotal } from '../Redux/Slices/cartSlice'
 
 const CartPage = () => {

@@ -43,7 +43,7 @@ export const registerUser = async (req, res) => {
 	            expires: new Date(Date.now() + 1000 * 86400),
 	            sameSite: "none",
 	            secure: true
-            }).status(201).json({_id: newUser._id, username: newUser.username, token})
+            }).status(201).json({_id: newUser._id, username: newUser.username, token, msg: "successfully Logged in🥇"})
         })
     } catch(error) {
         if (error) {

@@ -5,6 +5,7 @@ import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 import { useSelector, useDispatch } from "react-redux"
 import { selectUser, registerSuccess, registerStart, registerFailure, registerError } from "../Redux/Slices/userSlice.js"
 import { register } from "../Redux/apiCalls"
+import { toast } from 'react-toastify';
 import axios from "axios"
 import '../App.css'
 
@@ -34,10 +35,11 @@ const SignIn = () => {
 					setFormData({email: "", password: "", username: ""})
 					console.log(res)
 					navigate("/")
+					toast.success("Congratulation🎉, Welcome")
 				}
 			} catch (error) {
 				if (error || !res.status === 201 || !res.statusText === 'OK') {
-					console.log(error?.response?.data?.msg)
+					toast.error(error?.response?.data?.msg)
 					console.log(error)
 					dispatch(registerFailure(error?.response?.data?.msg))
 				}

@@ -13,28 +13,26 @@ import BookPage from "./pages/BookPage.jsx"
 import CartPage from "./pages/CartPage.jsx"
 import Login from "./pages/Login.jsx"
 import SignUp from "./pages/SignUp.jsx"
-// import image from "./"
+import SellBook from "./pages/SellBook.jsx"
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import './App.css'
 
 function App() {
 	
   return (
     <section className="min-h-screen font-['Montserrat'] h-auto w-full scroll-smooth">
+    <ToastContainer />
      <BrowserRouter>
 	    <Routes>
 	    	<Route path="/" element={<Home />} />
 	    	<Route path="/book_details/:id" element={<BookPage />} />
 	    	<Route path="/cart_page" element={<CartPage />} />
 	    	<Route path="/log_in" element={<Login />} />
-	    	<Route path="/sign_up" element={<SignUp />} />
-	    	{/*<SmallHeader />
-	        <LargeHeader />
-	        <MainSection />
-	        <BestSelling />
-	        <Featured />
-	        <MoreBooks />
-	        <InforSection />
-	        <Footer />*/}
+        <Route path="/sign_up" element={<SignUp />} />
+	    	<Route path="/upload_book" element={<SellBook />} />
         </Routes>
     </BrowserRouter>
     </section>

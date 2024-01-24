@@ -1,8 +1,10 @@
 import React from 'react'
+import { useNavigate } from "react-router-dom"
 import { FaYoutube, FaFacebook, FaInstagram, FaPhoneAlt } from "react-icons/fa"
 import { IoMdMail, IoMdTime } from "react-icons/io"
 
 const SmalHeader = () => {
+	const navigate = useNavigate()
 	return (
 		<section className="flex justify-between items-center w-full bg-gray-200 px-20 h-[40px] ">
 			{/*<div className=" w-full">*/}
@@ -20,7 +22,7 @@ const SmalHeader = () => {
 					</div>
 				</div>
 				{/*SELL A BOOK*/}
-				<p className="sell_book">Sell a book</p>
+				<p onClick={() => navigate("/upload_book")} className="sell_book">Sell a book</p>
 				{/*//cta*/}
 				<div className="flex space-x-3 px-20 items-center">
 					<span className="cta_media">
