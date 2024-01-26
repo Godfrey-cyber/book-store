@@ -5,6 +5,7 @@ export const protect = async(req, res, next) => {
 	try{
 		const { token } = req.cookies
 		if (!token) {
+			console.log(token)
 			return res.status(401).json({msg: 'You are not authorized!.'})
 		}
 		//verify token
