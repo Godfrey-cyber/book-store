@@ -4,7 +4,7 @@ import { createBook, getBook, getAllBooks, updateBook, deleteBook, booksByCatego
 
 const router = express.Router()
 
-router.post("/create-book", createBook)
+router.post("/create-book", protect, createBook)
 router.get("/getBook/:id", getBook)
 router.get("/getAllBooks", getAllBooks)
 router.get("/books-by-category/:id", booksByCategory)

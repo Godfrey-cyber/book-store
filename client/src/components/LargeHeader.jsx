@@ -36,7 +36,6 @@ const LargeHeader = () => {
 		}
 
 	}, [scrolled])
-	console.log(searchTerm)
 
 	useEffect(() => {
 		const handleSearch = async () => {

@@ -3,16 +3,21 @@ import Category from "../models/Category.js"
 
 // CREATE A NEW BOOK
 export const createBook = async(req, res) => {
-	const { title, desc, price, photo, inStock, discount, catId, condition, userId, author, pages, year, isbn } = req.body
+	const { title, desc, price, photo, inStock, discount, catId, condition, author, pages, year, isbn, language } = req.body
+	
+	if (title == "" || desc == "" || price == "" || photo == "" || inStock == "" || discount == "" || catId == "" || condition == "" || author == "" || pages == "" || year == "" || isbn == "" || language == "") {
+		return res.status(400).json({ msg: '❌ Please enter all fields' })
+	}
 	try {
-		const book = await Book.create({ title, desc, price, photo, inStock, discount, isbn, catId, condition, userId: req.user._id, author, pages, year })
-		try {
+		const book = await Book.create({ title, desc, price, photo, inStock, discount, isbn, catId, condition, userId: req.user._id, author, pages, year, language })
+		// try {
 			await Category.findByIdAndUpdate(catId, {$push:{productId: book._id }})
 			// res.status(200).json()
-		} catch (error) {
-			return res.status(401).json(error)
-		}
-        return res.status(201).json({data: book, status: 'Success' })
+			console.log(book)
+		// } catch (error) {
+			// return res.status(401).json({ msg: "Something Went Wrong" })
+		// }
+        return res.status(201).json({data: book, status: 'Success', statusCode: 201 })
 	} catch (error) {
         return res.status(500).json(error)
     }

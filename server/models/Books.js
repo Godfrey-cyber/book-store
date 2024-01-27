@@ -39,6 +39,9 @@ const BookSchema = new mongoose.Schema({
 	discount: { 
 		type: Number, default: 0,
 	},
+	language: { 
+		type: Number, default: 'English',
+	},
 	userId: { 
 		type: mongoose.Schema.ObjectId, ref: "User", 
 		required: [true, "A Book must belong to a user"] 
