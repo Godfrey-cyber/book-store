@@ -17,6 +17,8 @@ const SellBook = () => {
 	const user = useSelector(selectUser)
 	const [redirect, setRedirect] = useState(false)
 	const [category, setCategory] = useState([])
+
+	const [bookData, setBookData] = useState({ title: "", desc: "", price: "", photo: "", inStock: "", discount: "", catId: "", condition: "", author: "", pages: "", year: "", isbn: "", language: "" })
 	// const [formData, setFormData] = useState({ title: "", price: "", photo: "", isbn: "", year: "", pages: "", discount: "", inStock: "", desc: "", desc: "", language: "", condition: "", author: "" })
 	const [title, setTitle] = useState('')
 	const [price, setPrice] = useState('')
@@ -34,9 +36,13 @@ const SellBook = () => {
 	const [catName, setCatName] = useState('')
 	// CREATE BOOK
 
-	// const onChange = (event) => {
- //        setFormData(prev => ({...prev, [event.target.name]: event.target.value}))
- //    }
+	const onChange = (event) => {
+        setBookData(prev => ({...prev, [event.target.name]: event.target.value}))
+    }
+    console.log(bookData)
+
+    // const = { title, price, photo, isbn, year, pages, discount, inStock, desc, language, condition, author, catId, catName } = info
+    // console.log(info)
  	// category fetch
  	useEffect(() => {
  		const getCategories = async() => {
@@ -64,62 +70,42 @@ const SellBook = () => {
 	const createBook = async(event) => {
 		event.preventDefault()
 
-		const formData = new FormData()
-		formData.set("title", title)
-		formData.set("price", price)
-		formData.set("desc", desc)
-		formData.set("inStock", inStock)
-		formData.set("author", author)
-		formData.set("isbn", isbn)
-		formData.set("photo", photo)
-		formData.set("pages", pages)
-		formData.set("year", year)
-		formData.set("condition", condition)
-		formData.set("discount", discount)
-		formData.set("catId", catId)
-		formData.set("language", language)
-
-		console.log(formData)
+		// const formData = new FormData()
+		// formData.set("title", title)
+		// formData.set("price", price)
+		// formData.set("desc", desc)
+		// formData.set("inStock", inStock)
+		// formData.set("author", author)
+		// formData.set("isbn", isbn)
+		// formData.set("photo", photo)
+		// formData.set("pages", pages)
+		// formData.set("year", year)
+		// formData.set("condition", condition)
+		// formData.set("discount", discount)
+		// formData.set("catId", catId)
+		// formData.set("language", language)
 
 		try {
-			const res = await axios.post("http://localhost:5000/api/v1/books/create-book", formData, { withCredentials: true  })
+			const res = await axios.post("http://localhost:5000/api/v1/books/create-book", { title, price, photo, isbn, year, pages, discount, inStock, desc, language, condition, author, catId, catName }, { withCredentials: true })
 			console.log(res)
 			if (res.status === 201 || res.statusText === 'OK') {
 				setRedirect(true)
 				console.log(res)
 				toast.success("Book successfully created")
 			}
-
-			// const response = await fetch("http://localhost:5000/api/v1/books/create-book", {
-			// 	method: "POST",
-			// 	body: formData,
-			// 	headers: { 'Content-Type': 'application/json' },
-			// 	credentials: "include",
-			// })
-			// if (response.ok) {
-			// 	setRedirect(true)
-			// 	toast.success("Book successfully created")
-			// 	console.log(res)
-			// }
 		} catch (error) {
 			if (error || !res.status === 201 || !res.statusText === 'OK') {
 				// toast.error(error?.response.data)
 				console.log(error)
 			}
-
-			// if (error) {
-			// 	console.log(error)
-			// 	// toast.error(error.response.data.msg)
-			// } 
 		}
-		console.log(formData)
+		console.log(bookData)
 	}
+
 
 	if (redirect) {
 		return <Navigate to={'/'}/>
 	}
-
-
 	return (
 		<section className="w-full h-full bg-white">
 			<SmallHeader />
@@ -182,7 +168,6 @@ const SellBook = () => {
 									<input value={condition} onChange={event => setCondition(event.target.value)} name="condition" className="input" placeholder='condition' type="text" id="condition" />
 								</span>
 							</div>
-							
 						</div>
 					</div>
 					<div className="flex flex-col w-full h-fit my-12">

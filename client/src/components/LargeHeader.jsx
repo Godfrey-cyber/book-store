@@ -80,7 +80,7 @@ const LargeHeader = () => {
 		        				<img src={book.photo} className="h-24 w-16 rounded" alt="" />
 		        				<span className="flex flex-col justify-between p-2">
 		        					<p className="text-sm font-semibold text-gray-800 group-hover:text-red-400 transition-all delay-200">{book.title}</p>
-		        					<p className="text-xs font-normal text-gray-700">{book.author}</p>
+		        					<p className="text-xs font-normal text-gray-700">by {book.author}</p>
 		        				</span>
 		        			</div>
 		        		)) : <p className="">loading</p>}

@@ -41,7 +41,7 @@ export const getAllBooks = async(req, res) => {
 		const books = searchTerm ? await Book.find({ $text: { $search: searchTerm } }) : await Book.find().sort({ createdAt: -1 })
 		return res.status(200).json({ data: books, status: "Success", count: books.length })
 	} catch (error) {
-		return res.status(401).json({msg: "Something went wrong"})
+		return res.status(401).json({msg: error})
 	}
 }
 //GET BOOKS BY CATEGORY

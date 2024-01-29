@@ -31,7 +31,7 @@ const BookSchema = new mongoose.Schema({
 		type: Number, required: [true, "A Book must have a quantity"], default: 1
 	},
 	isbn: {
-		type: Number, 
+		type: Number, reqiured: [true, "A Book must have an ISBN"]
 	},
 	price: { 
 		type: Number, required: [true, "A Book must have a price"]
@@ -40,7 +40,7 @@ const BookSchema = new mongoose.Schema({
 		type: Number, default: 0,
 	},
 	language: { 
-		type: Number, default: 'English',
+		type: String, default: 'English',
 	},
 	userId: { 
 		type: mongoose.Schema.ObjectId, ref: "User", 

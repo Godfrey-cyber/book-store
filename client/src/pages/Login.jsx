@@ -40,10 +40,10 @@ const Login = () => {
 				}
 			} catch (err) {
 				if (err || !res.status === 200 || !res.statusText === 'OK') {
-					dispatch(loginFailure(err.response.data.msg))
+					dispatch(loginFailure(err?.response?.data.msg))
 					setFormData({email: "", password: ""})
+					toast.error(err?.response?.data?.msg)
 				}
-				toast.error(err?.response?.data?.msg)
 			}
         } else {
     		toast.error('Soory! Cannot log you without credentials')

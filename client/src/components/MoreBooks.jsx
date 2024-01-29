@@ -13,12 +13,12 @@ const MoreBooks = () => {
 		const getCategories = async() => {
 			try {
 				const response = await axios.get('http://localhost:5000/api/v1/categories/get-categories')
-				if (response.status === 200) {
+				if (response && response?.status === 200 || response.statusText === "OK") {
 					setCategories(response.data.data)
 					// console.log(categories)
 				}
 			} catch(error) {
-				if (!response.status === 200 || !response.statusText === 'OK') {
+				if (error || !response?.status === 200 || !response?.statusText === 'OK') {
 					console.error('❗Error fetching data❌:', error.message);
 					// console.log(categories)
 				}
@@ -33,11 +33,11 @@ const MoreBooks = () => {
 		const getBooks = async() => {
 			try {
 				const response = await axios.get('http://localhost:5000/api/v1/books/getAllBooks')
-				if (response.status === 200) {
-					setBooks(response.data.data)
+				if (response && response?.status === 200 || response.statusText === "OK") {
+					setBooks(response?.data?.data)
 				}
 			} catch(error) {
-				if (!response.status === 200 || !response.statusText === 'OK') {
+				if (error || !response?.status === 200 || !response?.statusText === 'OK') {
 					console.error('❗Error fetching data❌:', error.message);
 				}
 			}
