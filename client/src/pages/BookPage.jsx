@@ -63,7 +63,7 @@ const BookPage = () => {
     	console.log(i.count);
 	}
 
-	const iterable = filterBook.forEach(({count, title, desc }) => desc)
+	const iterable = filterBook.forEach(({count, title, desc }) => console.log(desc))
 	console.log(iterable)
 	
 	const [count, setCount] = useState(arr ? arr : 0)
@@ -95,7 +95,7 @@ const BookPage = () => {
 				</div>
 				<div className="col-span-9 flex flex-col space-y-4 h-full w-full px-10">
 					<p className="text-4xl font-normal tex-gray-700">{book.title}</p>
-					<p className="text-lg font-light tex-gray-700 cursor-pointer hover:underline">{book.author}</p>
+					<p className="text-lg font-light tex-gray-700 cursor-pointer hover:underline">By {book.author}</p>
 					<span className="flex items-center cursor-pointer">
 						<FaStar className="page_icon" />
 						<FaStar className="page_icon" />
@@ -107,7 +107,7 @@ const BookPage = () => {
 						<p className="text-sm font-light text-gray-700">(120 Reviews)</p>
 						<p className="text-sm font-light text-red-500">1,142 Ratings</p>
 					</span>
-					<p className="text-sm font-light text-gray-700">{book.desc}</p>
+					<p className="text-sm font-light text-gray-700" dangerouslySetInnerHTML={{__html:book.desc}} />
 					<span className="flex space-x-3 text-sm items-center">
 						<p className="text-gray-700 font-light">Price:</p>
 						<p className="text-red-500 font-light">Ksh. {book.price}</p>
