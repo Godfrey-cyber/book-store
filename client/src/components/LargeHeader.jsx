@@ -42,7 +42,7 @@ const LargeHeader = () => {
 			// event.preventDefault()
 			try {
 				const response = await axios.get(`https://my-book-store-1oki.onrender.com/api/v1/books/getAllBooks?search=${searchTerm}`)
-				if (response.status === 200 || response.statusText === 'OK') {
+				if (response && response.status === 200 || response.statusText === 'OK') {
 					setSearchResults(response.data.data)
 					setLoading(false)
 				}
