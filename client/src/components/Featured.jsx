@@ -8,7 +8,7 @@ const Featured = () => {
 	useEffect(() => {
 		const getBooks = async() => {
 			try {
-				const response = await axios.get('http://localhost:5000/api/v1/books/getAllBooks')
+				const response = await axios.get('https://my-book-store-1oki.onrender.com/api/v1/books/getAllBooks')
 				if (response.status === 200) {
 					setBooks(response.data.data)
 				}

@@ -11,8 +11,8 @@ const MoreBooks = () => {
 	// const 
 	useEffect(() => {
 		const getCategories = async() => {
-			try {
-				const response = await axios.get('http://localhost:5000/api/v1/categories/get-categories')
+			try { 
+				const response = await axios.get('https://my-book-store-1oki.onrender.com/api/v1/categories/get-categories')
 				if (response && response?.status === 200 || response.statusText === "OK") {
 					setCategories(response.data.data)
 					// console.log(categories)
@@ -32,7 +32,7 @@ const MoreBooks = () => {
 	useEffect(() => {
 		const getBooks = async() => {
 			try {
-				const response = await axios.get('http://localhost:5000/api/v1/books/getAllBooks')
+				const response = await axios.get('https://my-book-store-1oki.onrender.com/api/v1/books/getAllBooks')
 				if (response && response?.status === 200 || response.statusText === "OK") {
 					setBooks(response?.data?.data)
 				}

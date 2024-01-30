@@ -29,7 +29,7 @@ const SignIn = () => {
         dispatch(registerStart())
         if (!password == "" || !email == "" || !username == "") {
 			try {
-				const res = await axios.post("http://localhost:5000/api/v1/users/register", formData)
+				const res = await axios.post("https://my-book-store-1oki.onrender.com/api/v1/users/register", formData)
 				if (res.status === 201 || res.statusText === 'OK') {
 					dispatch(registerSuccess(res.data))
 					setFormData({email: "", password: "", username: ""})

@@ -47,7 +47,7 @@ const SellBook = () => {
  	useEffect(() => {
  		const getCategories = async() => {
  			try {
- 				const res = await axios.get("http://localhost:5000/api/v1/categories/get-categories")
+ 				const res = await axios.get("https://my-book-store-1oki.onrender.com/api/v1/categories/get-categories")
  				if (res.status === 200 || res.statusText === 'OK') {
            			setCategory(res.data.data)
 				}
@@ -86,7 +86,7 @@ const SellBook = () => {
 		// formData.set("language", language)
 
 		try {
-			const res = await axios.post("http://localhost:5000/api/v1/books/create-book", { title, price, photo, isbn, year, pages, discount, inStock, desc, language, condition, author, catId, catName }, { withCredentials: true })
+			const res = await axios.post("https://my-book-store-1oki.onrender.com/api/v1/books/create-book", { title, price, photo, isbn, year, pages, discount, inStock, desc, language, condition, author, catId, catName }, { withCredentials: true })
 			console.log(res)
 			if (res.status === 201 || res.statusText === 'OK') {
 				setRedirect(true)
