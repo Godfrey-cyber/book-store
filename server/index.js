@@ -26,7 +26,7 @@ app.use(cors({
 }))
 
 // Apply the rate limiting middleware to all requests.
-app.use(limiter)
+// app.use(limiter)
 
 // connection to the mongodb
 const MONGO_URL = process.env.MONGO_URL
