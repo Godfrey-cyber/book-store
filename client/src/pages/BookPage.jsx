@@ -78,7 +78,9 @@ const BookPage = () => {
 					console.log('error')
 				}
 			} catch(error) {
-				console.error('❗Error fetching data❌:', error.message);
+				if (error || !response.status === 200 || !response.statusText === 'OK') {
+					console.error('❗Error fetching data❌:', error.message);
+				}
 			}
 		}
 		getBook()
